@@ -5,6 +5,7 @@ import { normalizeTrendData } from "./utils";
 import { DashboardFilters } from "./components/DashboardFilters";
 import { SummaryStatsGrid } from "./components/SummaryStatsGrid";
 import { TrendChartCard } from "./components/TrendChartCard";
+import { PieChartCard } from "./components/PieChartCard";
 import { AnalyticalHighlightsCard } from "./components/AnalyticalHighlightsCard";
 import { InsightsCard } from "./components/InsightsCard";
 
@@ -91,15 +92,18 @@ export const FinanceDashboard = () => {
         totalExpenseFromSeries={totalExpenseFromSeries}
       />
 
-      <TrendChartCard
-        period={period}
-        categoryId={categoryId}
-        accountId={accountId}
-        trendLoading={trendLoading}
-        trendError={trendError}
-        refetchTrend={refetchTrend}
-        chartData={chartData}
-      />
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <TrendChartCard
+          period={period}
+          categoryId={categoryId}
+          accountId={accountId}
+          trendLoading={trendLoading}
+          trendError={trendError}
+          refetchTrend={refetchTrend}
+          chartData={chartData}
+        />
+        <PieChartCard />
+      </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <AnalyticalHighlightsCard

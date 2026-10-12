@@ -2,8 +2,8 @@ import { Card } from "@/shared/components/Card";
 import { Spinner } from "@/shared/components/Spinner";
 import ErrorState from "@/shared/components/Error/ErrorState";
 import {
-  AreaChart,
-  Area,
+  BarChart,
+  Bar,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -47,20 +47,11 @@ export const TrendChartCard = ({
         ) : (
           <div className="h-80 w-full">
             <ResponsiveContainer width="100%" height="100%">
-              <AreaChart
+              <BarChart
                 data={chartData}
                 margin={{ top: 8, right: 20, left: 0, bottom: 0 }}
+                barGap={4}
               >
-                <defs>
-                  <linearGradient id="incomeGradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#16a34a" stopOpacity={0.35} />
-                    <stop offset="95%" stopColor="#16a34a" stopOpacity={0.02} />
-                  </linearGradient>
-                  <linearGradient id="expenseGradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#dc2626" stopOpacity={0.35} />
-                    <stop offset="95%" stopColor="#dc2626" stopOpacity={0.02} />
-                  </linearGradient>
-                </defs>
                 <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
                 <XAxis
                   dataKey="label"
@@ -75,31 +66,37 @@ export const TrendChartCard = ({
                   tick={{ fill: "#6b7280", fontSize: 12 }}
                 />
                 <Tooltip
+                  shared={false}
+                  cursor={false}
                   formatter={(value, name) => [formatCurrency(value), name]}
                   labelStyle={{ color: "#111827" }}
                 />
                 <Legend />
-                <Area
-                  type="monotone"
+                <Bar
                   dataKey="income"
                   name="Income"
                   stroke="#16a34a"
-                  fill="url(#incomeGradient)"
-                  strokeWidth={2}
-                  dot={false}
-                  activeDot={{ r: 4 }}
+                  fill="#16a34a"
+                  radius={[4, 4, 0, 0]}
+                  activeBar={{
+                    fill: "#15803d",
+                    stroke: "#14532d",
+                    strokeWidth: 2,
+                  }}
                 />
-                <Area
-                  type="monotone"
+                <Bar
                   dataKey="expense"
                   name="Expense"
                   stroke="#dc2626"
-                  fill="url(#expenseGradient)"
-                  strokeWidth={2}
-                  dot={false}
-                  activeDot={{ r: 4 }}
+                  fill="#dc2626"
+                  radius={[4, 4, 0, 0]}
+                  activeBar={{
+                    fill: "#b91c1c",
+                    stroke: "#7f1d1d",
+                    strokeWidth: 2,
+                  }}
                 />
-              </AreaChart>
+              </BarChart>
             </ResponsiveContainer>
           </div>
         )}
