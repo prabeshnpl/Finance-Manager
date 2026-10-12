@@ -9,8 +9,8 @@ export const DashboardFilters = ({
   accountsData,
 }) => {
   return (
-    <div className="flex flex-wrap justify-between items-center gap-3">
-      <h2 className="text-2xl font-bold text-gray-900">Financial Overview</h2>
+    <div className="flex flex-wrap justify-between items-center gap-3 px-3">
+      <h2 className="text-xl font-bold text-gray-900">Financial Overview</h2>
       <div className="flex flex-wrap items-center gap-2">
         <select
           value={period}

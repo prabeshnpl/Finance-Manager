@@ -53,7 +53,7 @@ export const OrganizationPage = () => {
   }
 
   return (
-    <div className="p-6 space-y-6">
+    <>
 
       {/* Tabs Navigation */}
       <Tabs tabs={tabs} activeTab={activeTab} onChange={setActiveTab} />
@@ -101,6 +101,6 @@ export const OrganizationPage = () => {
         </div>
       )}
       
-    </div>
+    </>
   );
 };

@@ -45,14 +45,7 @@ export const Dashboard = () => {
   };
 
   return (
-    <div className="space-y-6 p-4 sm:p-6">
-      <div>
-        <h1 className="text-2xl font-bold sm:text-3xl">Dashboard</h1>
-        <p className="mt-1 text-sm sm:text-base">
-          Live view of tasks, roadmaps, and finance for your active organization.
-        </p>
-      </div>
-
+    <>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
         <StatsCard
           title="Active Tasks"
@@ -137,6 +130,6 @@ export const Dashboard = () => {
           />
         </div>
       </div>
-    </div>
+    </>
   );
 };

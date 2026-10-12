@@ -20,36 +20,40 @@ export const SummaryStatsGrid = ({
 }) => {
   const stats = [
     {
-      title: "Total Income",
+      title: "Income",
       value: formatCurrency(summaryData?.income || totalIncomeFromSeries),
-      icon: TrendingUp,
       color: "green",
       trend: summaryData?.income_trend,
     },
     {
-      title: "Total Expenses",
+      title: "Expenses",
       value: formatCurrency(summaryData?.expenses || totalExpenseFromSeries),
-      icon: TrendingDown,
       color: "red",
       trend: summaryData?.expenses_trend,
     },
     {
-      title: "Net Balance",
+      title: "Total Balance",
       value: formatCurrency(summaryData?.balance || 0),
-      icon: Wallet,
       color: Number(summaryData?.balance || 0) >= 0 ? "blue" : "red",
     },
   ];
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
       {stats.map((stat) => {
-        const Icon = stat.icon;
         return (
-          <div key={stat.title} className="bg-white rounded-lg shadow-md p-4 sm:p-6">
-            <div className="flex items-center justify-between gap-2">
-              <div className="flex-1 min-w-0">
-                <p className="text-xs sm:text-sm text-gray-600 mb-1">{stat.title}</p>
+          <div key={stat.title} className="bg-white rounded-4xl border-4 border-gray-200 pl-6 py-5">
+
+            <div className="flex-col items-center justify-between">
+
+              <div className="mb-8 flex justify-between items-center mr-4">
+                <p className="font-extrabold sm:text-xl text-gray-600">{stat.title}</p>
+                <div className={`p-2 rounded-full border-2 border-gray-400`}>
+                  <ArrowUpRight className="h-6 w-6 text-gray-900" />
+                </div>
+              </div>
+              
+              <div>
                 <p className="text-2xl font-bold text-gray-900 truncate">{stat.value}</p>
                 {stat.trend && (
                   <div className="flex items-center mt-2">
@@ -69,11 +73,11 @@ export const SummaryStatsGrid = ({
                   </div>
                 )}
               </div>
-              <div className={`p-3 rounded-full ${colorClasses[stat.color]}`}>
-                <Icon className="h-8 w-8" />
-              </div>
+
             </div>
+
           </div>
+
         );
       })}
     </div>

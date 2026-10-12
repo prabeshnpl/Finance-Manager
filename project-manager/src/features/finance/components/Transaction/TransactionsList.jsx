@@ -71,7 +71,8 @@ export const TransactionsList = () => {
   return (
     <div className='mt-5'>
       <Card
-        title={`Transactions (${pages?.pages?.at(-1)?.meta?.total_count || 0})`}
+        // title={`Transactions (${pages?.pages?.at(-1)?.meta?.total_count || 0})`}
+        title={`Transactions`}
         action={
           <div className="flex flex-wrap gap-2 items-center">
             <SearchBar

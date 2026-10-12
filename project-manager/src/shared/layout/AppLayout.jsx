@@ -12,8 +12,10 @@ export const AppLayout = () => {
       <TopBar onToggleSidebar={() => setShowSidebar((s) => !s)} />
       <div className="flex flex-1 overflow-hidden">
         <Sidebar isOpen={showSidebar} onClose={() => setShowSidebar(false)} />
-        <main className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden bg-yellow-50">
-          <Outlet />
+        <main className="flex-1 min-h-0 overflow-x-hidden bg-yellow-50 scrollbar-hide">
+          <div className="space-y-4 sm:p-3 lg:p-4">
+            <Outlet />
+          </div>
         </main>
       </div>
       <ErrorMessage />
