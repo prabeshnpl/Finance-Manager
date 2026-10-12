@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { User, Crown, Shield, MoreVertical, Trash2 } from 'lucide-react';
-import Dropdown from '../../../shared/components/Dropdown';
 
 export const MemberCard = ({
   member,
@@ -73,10 +72,11 @@ export const MemberCard = ({
   };
 
   return (
-    <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+    <div className="flex items-center gap-5 justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+
       <div className="flex items-center space-x-4">
         {/* Avatar */}
-        <div className="h-12 w-12 rounded-full bg-blue-600 flex items-center justify-center text-white font-semibold">
+        <div className="h-12 w-12 rounded-full bg-blue-200 flex items-center justify-center font-semibold">
           {getInitials()}
         </div>
 
@@ -155,6 +155,7 @@ export const MemberCard = ({
           </div>
         )}
       </div>
+
     </div>
   );
 };

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useOrganizationstore } from '../../organization/hooks/useOrganizationstore';
 import { ChevronDown, Building2, Plus } from 'lucide-react';
 
-export const OrganizationSwitcher = () => {
+export const OrganizationSwitcher = ({ className = '' }) => {
   const { 
     organizations, 
     activeOrganization, 
@@ -45,7 +45,7 @@ export const OrganizationSwitcher = () => {
   }
 
   return (
-    <div className="relative z-55 hidden sm:block">
+    <div className={`relative z-55 ${className}`}>
       <button
         onClick={() => setIsOpen(!isOpen)}
         disabled={switching}
@@ -71,13 +71,7 @@ export const OrganizationSwitcher = () => {
             className="fixed inset-0 z-54" 
             onClick={() => setIsOpen(false)}
           ></div>
-          <div className="absolute left-0 mt-2 w-64 bg-white rounded-lg shadow-xl z-55 py-2">
-            <div className="px-4 py-2 border-b border-gray-200">
-              <p className="text-xs font-semibold text-gray-500 uppercase">
-                Your Organizations
-              </p>
-            </div>
-            
+          <div className="absolute left-0 mt-2 w-64 bg-white rounded-lg shadow-xl z-55 py-2">            
             {organizations.map((org) => (
               <button
                 key={org.id}
