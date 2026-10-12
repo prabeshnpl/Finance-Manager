@@ -48,7 +48,7 @@ export const ReportsPage = () => {
         <div className="flex items-center space-x-3">
           <FileBarChart className="h-8 w-8 text-blue-600" />
           <div>
-            <h2 className="text-2xl font-bold text-gray-900">Financial Reports</h2>
+            <h2 className="text-xl font-bold text-gray-900">Financial Reports</h2>
             <p className="text-sm text-gray-600">Comprehensive analysis of your finances</p>
           </div>
         </div>

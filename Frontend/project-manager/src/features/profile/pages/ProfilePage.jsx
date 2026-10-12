@@ -28,7 +28,7 @@ export const ProfilePage = () => {
   ];
 
   return (
-    <div className="p-4 sm:p-6 space-y-6 max-w-5xl mx-auto">
+    <>
       {/* Header */}
       <div>
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Profile</h1>
@@ -62,6 +62,6 @@ export const ProfilePage = () => {
           />
         </TabPanel> */}
       </div>
-    </div>
+    </>
   );
 };

@@ -75,7 +75,7 @@ export const AccountPage = () => {
       <div className="space-y-6 pb-6">
         <header className="flex flex-col gap-4 rounded-2xl  p-6 shadow-sm sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="mt-1 text-2xl font-bold">Accounts</h1>
+            <h1 className="mt-1 text-xl font-bold">Accounts</h1>
             <p className="mt-1 text-sm">
               Balances and everyday money in one place.
             </p>

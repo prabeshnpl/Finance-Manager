@@ -27,7 +27,7 @@ const RoadmapPage = () => {
   );
 
   return (
-    <div className="p-4 sm:p-6 space-y-6">
+    <>
 
       <RoadmapList
         infiniteRoadmaps={infiniteRoadmaps}
@@ -49,7 +49,7 @@ const RoadmapPage = () => {
       {infiniteRoadmaps?.isLoading && roadmaps.length === 0 && (
         <div className="text-sm text-gray-500">Loading roadmaps...</div>
       )}
-    </div>
+    </>
   );
 };
 
