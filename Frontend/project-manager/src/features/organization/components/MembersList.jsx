@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Card } from '../../../shared/components/Card';
 import { Button } from '../../../shared/components/Button';
 import { EmptyState } from '../../../shared/components/EmptyState';
 import { MemberCard } from './MemberCard';
@@ -22,32 +21,38 @@ export const MembersList = ({
 
   if (isLoading) {
     return (
-        <div className="flex items-center justify-center h-full">
+      <section className="flex min-h-40 items-center justify-center p-6">
         <Spinner size="lg" />
-        </div>
+      </section>
     );
   }
 
-  if (error){
-    return <ErrorState message="Failed to load accounts." onRetry={refetch} />;
+  if (error) {
+    return (
+      <section className="p-5 sm:p-6">
+        <ErrorState message="Failed to load organization members." onRetry={refetch} />
+      </section>
+    );
   }
 
   return (
     <>
-      <Card
-        title={`Members (${data.length})`}
-        action={
-          canManageMembers && (
+      <section className="space-y-5 p-5 sm:p-6">
+        <div className="flex flex-wrap items-center gap-7">
+          <h2 className="text-lg font-semibold text-gray-900">
+            Members ({data.length})
+          </h2>
+          {canManageMembers && (
             <Button
+              className="flex items-center"
               size="sm"
               onClick={() => setShowInviteModal(true)}
             >
               <UserPlus className="h-4 w-4 mr-2" />
               Invite Member
             </Button>
-          )
-        }
-      >
+          )}
+        </div>
         {data.length === 0 ? (
           <EmptyState
             icon={Users}
@@ -63,7 +68,7 @@ export const MembersList = ({
             }
           />
         ) : (
-          <div className="space-y-3">
+          <div className="space-y-3 flex flex-wrap justify-start gap-4">
             {data.map((m) => (
               <MemberCard
                 key={m.id}
@@ -76,7 +81,7 @@ export const MembersList = ({
             ))}
           </div>
         )}
-      </Card>
+      </section>
 
       {showInviteModal && (
         <InviteMemberModal
@@ -86,4 +91,4 @@ export const MembersList = ({
       )}
     </>
   );
-};
+}

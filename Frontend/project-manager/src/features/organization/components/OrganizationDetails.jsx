@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { Card } from '../../../shared/components/Card';
+import { useState } from 'react';
 import { Button } from '../../../shared/components/Button';
 import { Building2, Edit2, Calendar, User } from 'lucide-react';
 import { EditOrganizationModal } from './EditOrganizationModal';
@@ -28,71 +27,65 @@ export const OrganizationDetails = ({ organization, canEdit, onUpdate }) => {
 
   return (
     <>
-      <Card
-        title="Organization Details"
-        action={
-          canEdit && (
-            <Button
-              size="sm"
-              variant="ghost"
-              onClick={() => setShowEditModal(true)}
-            >
-              <Edit2 className="h-4 w-4 mr-2" />
-              Edit
-            </Button>
-          )
-        }
-      >
-        <div className="space-y-6">
-          {/* Organization Icon and Name */}
-          <div className="flex items-center space-x-4">
-            <div className="h-16 w-16 bg-blue-100 rounded-lg flex items-center justify-center">
-              <Building2 className="h-8 w-8 text-blue-600" />
+      <section className="p-5 sm:p-6">
+        <div className="flex flex-wrap items-start justify-between gap-5">
+          <div className="flex min-w-0 flex-1 flex-wrap items-center gap-x-8 gap-y-5">
+            <div className="flex min-w-0 items-center gap-4">
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-blue-50">
+                <Building2 className="h-6 w-6 text-blue-600" />
+              </div>
+              <div className="min-w-0">
+                <h2 className="wrap-break-word text-xl font-semibold text-gray-900">
+                  {organization.name}
+                </h2>
+                <span
+                  className={`mt-1 inline-block rounded-full px-3 py-1 text-xs font-semibold ${getTypeBadgeColor(
+                    organization.type
+                  )}`}
+                >
+                  {getTypeLabel(organization.type)}
+                </span>
+              </div>
             </div>
-            <div>
-              <h2 className="text-2xl font-bold text-gray-900">
-                {organization.name}
-              </h2>
-              <span
-                className={`inline-block px-3 py-1 rounded-full text-xs font-semibold mt-1 ${getTypeBadgeColor(
-                  organization.type
-                )}`}
-              >
-                {getTypeLabel(organization.type)}
-              </span>
-            </div>
-          </div>
 
-          {/* Details Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="flex items-start space-x-3">
-              <Calendar className="h-5 w-5 text-gray-400 mt-0.5" />
+            <div className="flex items-start gap-3">
+              <Calendar className="mt-0.5 h-5 w-5 text-gray-400" />
               <div>
                 <p className="text-sm font-medium text-gray-500">Created</p>
-                <p className="text-base text-gray-900">
+                <p className="text-sm text-gray-900">
                   {formatDate(organization.created_at)}
                 </p>
               </div>
             </div>
 
-            <div className="flex items-start space-x-3">
-              <User className="h-5 w-5 text-gray-400 mt-0.5" />
+            <div className="flex min-w-0 items-start gap-3">
+              <User className="mt-0.5 h-5 w-5 shrink-0 text-gray-400" />
               <div>
                 <p className="text-sm font-medium text-gray-500">Owner</p>
-                <p className="text-base text-gray-900">
+                <p className="break-all text-sm text-gray-900">
                   {organization.created_by?.email || 'You'}
                 </p>
               </div>
             </div>
+
+            <div>
+              <p className="text-sm font-medium text-gray-500">Organization ID</p>
+              <p className="break-all text-sm text-gray-900">{organization.id}</p>
+            </div>
           </div>
 
-          {/* Organization ID (for reference) */}
-          <div className="border-t border-gray-200 pt-4">
-            <p className="text-xs text-gray-500">Organization ID</p>
-            <p className="text-sm text-gray-700 font-mono">{organization.id}</p>
-          </div>
+          {canEdit && (
+            <Button
+              size="sm"
+              variant="ghost"
+              onClick={() => setShowEditModal(true)}
+            >
+              <Edit2 className="mr-2 h-4 w-4" />
+              Edit
+            </Button>
+          )}
         </div>
-      </Card>
+      </section>
 
       {showEditModal && (
         <EditOrganizationModal

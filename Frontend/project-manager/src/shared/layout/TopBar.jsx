@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useAuthStore } from '@/stores/authStore';
-import { OrganizationSwitcher } from '@/features/dashboard/components/OrganizationSwitcher';
 import { NotificationBell } from '@/features/notification/components/NotificationBell';
 import { User, LogOut, Settings } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export const TopBar = () => {
   const { user, logout } = useAuthStore();
+  const { pathname } = useLocation();
   const navigate = useNavigate();
   const [showUserMenu, setShowUserMenu] = useState(false);
 
@@ -26,7 +26,6 @@ export const TopBar = () => {
     <div className="bg-white border-b border-gray-200 px-4 sm:px-6 py-3 flex items-center justify-between">
       <div className="flex items-center space-x-4">
         <h1 className="text-xl sm:text-2xl font-bold text-blue-600">OrgManager</h1>
-        <OrganizationSwitcher />
       </div>
 
       <div className="flex items-center space-x-2 sm:space-x-4">
