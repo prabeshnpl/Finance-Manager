@@ -8,12 +8,15 @@ export const AppLayout = () => {
   const [showSidebar, setShowSidebar] = useState(false);
 
   return (
-    <div className="h-screen flex flex-col">
-      <TopBar onToggleSidebar={() => setShowSidebar((s) => !s)} />
-      <div className="flex flex-1 overflow-hidden">
+    <div className="flex h-dvh min-h-0 flex-col">
+      <TopBar
+        isSidebarOpen={showSidebar}
+        onToggleSidebar={() => setShowSidebar((s) => !s)}
+      />
+      <div className="flex min-h-0 flex-1 overflow-hidden">
         <Sidebar isOpen={showSidebar} onClose={() => setShowSidebar(false)} />
-        <main className="flex-1 min-h-0 overflow-x-hidden bg-yellow-50 scrollbar-hide">
-          <div className="space-y-4 sm:p-3 lg:p-4">
+        <main className="min-w-0 flex-1 overflow-x-hidden overflow-y-auto bg-yellow-50 scrollbar-hide">
+          <div className="space-y-4 p-3 sm:p-4 lg:p-6">
             <Outlet />
           </div>
         </main>

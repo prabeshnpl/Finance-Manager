@@ -2,6 +2,12 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+html {
+  /* Prevent mobile browsers from resizing text */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 :root{
     --primary-color:#2eed97;
     --secondary-color:#03d175;
@@ -42,8 +48,14 @@
     --sidebar-ring:oklch(0.708 0 0);
 }
 
+@font-face {
+  font-family: 'ComicSansWeb';
+  src: url('ComicSans.woff2') format('woff2'),
+       url('ComicSans.woff') format('woff');
+}
+
 body {
-  font-family: Comic Sans MS, Comic Sans, cursive; 
+  font-family: Comic Sans MS, Comic Sans, 'ComicSansWeb', 'Comic Neue', sans-serif;
 }
 
 .react-mde-embedded .mde-header {

@@ -28,23 +28,27 @@ export const Sidebar = ({ isOpen, onClose }) => {
   return (
     <>
       {/* Mobile backdrop */}
-      <div
+      <button
+        type="button"
+        aria-label="Close navigation menu"
+        tabIndex={isOpen ? 0 : -1}
         className={`fixed inset-0 z-40 bg-black/50 md:hidden transition-opacity ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
         onClick={onClose}
-      ></div>
+      />
 
-      <div className={`fixed top-0 left-0 h-full z-50 w-64 bg-gray-50 border-r border-gray-200 transform md:relative md:translate-x-0 transition-transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0`}>
+      <aside className={`fixed top-0 left-0 z-50 h-full w-64 shrink-0 overflow-y-auto bg-gray-50 border-r border-gray-200 transform md:relative md:translate-x-0 transition-transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0`}>
         <nav className="px-4 py-6 space-y-2">
           <div className="flex items-center justify-between mb-4 md:hidden">
             <h3 className="text-lg font-semibold">Menu</h3>
-            <button onClick={onClose} className="p-2 rounded-lg hover:bg-gray-200">
-              <X className="h-4 w-4" />
+            <button type="button" onClick={onClose} aria-label="Close navigation menu" className="p-2 rounded-lg hover:bg-gray-200">
+              <X className="h-4 w-4" aria-hidden="true" />
             </button>
           </div>
 
           {navigationItems.map((item) => {
             const Icon = item.icon;
-            const isActive = location.pathname === item.path;
+            const isActive = location.pathname === item.path ||
+              (item.path === '/dashboard' && location.pathname === '/');
 
             return (
               <button
@@ -62,7 +66,7 @@ export const Sidebar = ({ isOpen, onClose }) => {
             );
           })}
         </nav>
-      </div>
+      </aside>
     </>
   );
 };

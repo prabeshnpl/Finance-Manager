@@ -67,7 +67,7 @@ export const PersonalInformation = ({ onUpdate }) => {
       title="Personal Information"
       action={
         !isEditing && (
-          <Button size="sm" variant="ghost" onClick={() => setIsEditing(true)}>
+          <Button size="sm" variant="ghost" onClick={() => setIsEditing(true)} className="flex justify-center items-center">
             <Edit2 className="h-4 w-4 mr-2" />
             Edit
           </Button>
@@ -157,13 +157,13 @@ export const PersonalInformation = ({ onUpdate }) => {
         </div>
 
         {isEditing && (
-          <div className="flex flex-col-reverse sm:flex-row gap-3 mt-6">
+          <div className="flex flex-row gap-3 mt-6 justify-end">
             <Button
               type="button"
               variant="secondary"
               onClick={handleCancel}
               disabled={loading}
-              className="flex-1 sm:flex-none"
+              className="flex justify-center items-center flex-none"
             >
               <X className="h-4 w-4 mr-2" />
               Cancel
@@ -171,7 +171,7 @@ export const PersonalInformation = ({ onUpdate }) => {
             <Button
               type="submit"
               disabled={loading}
-              className="flex-1 sm:flex-none"
+              className="flex justify-center items-center flex-1 sm:flex-none"
             >
               <Save className="h-4 w-4 mr-2" />
               {loading ? 'Saving...' : 'Save Changes'}

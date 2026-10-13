@@ -107,13 +107,13 @@ const RegisterPage = () => {
     };
 
     return (
-        <div className="grid grid-cols-2 h-screen overflow-hidden">
+        <div className="min-h-screen lg:grid lg:grid-cols-2 lg:h-screen lg:overflow-hidden">
             {/* Left Side - Welcome Section */}
-            <div className="bg-linear-to-br from-green-500 to-green-600 flex flex-col justify-center items-center text-white p-8">
+            <div className="bg-linear-to-br from-green-500 to-green-600 flex flex-col justify-center items-center text-white px-5 py-7 sm:p-8 lg:min-h-screen">
                 <div className="text-center">
-                    <h1 className="text-5xl font-bold mb-4">Join Us</h1>
-                    <p className="text-xl opacity-90 mb-8">Create your account to get started</p>
-                    <div className="space-y-4 text-left">
+                    <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-2 sm:mb-4">Join Us</h1>
+                    <p className="text-base sm:text-xl opacity-90 mb-0 sm:mb-8">Create your account to get started</p>
+                    <div className="hidden lg:block space-y-4 text-left">
                         <div className="flex items-center">
                             <span className="text-2xl mr-3">✓</span>
                             <span>Fast and easy registration</span>
@@ -131,9 +131,9 @@ const RegisterPage = () => {
             </div>
 
             {/* Right Side - Registration Form */}
-            <div className="flex flex-col items-center justify-start p-8 bg-gray-50 overflow-y-auto h-screen">
-                <div className="w-full max-w-md py-8 ">
-                    <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">Create Account</h2>
+            <div className="flex flex-col items-center justify-start px-4 py-8 sm:px-8 sm:py-10 bg-gray-50 lg:overflow-y-auto lg:h-screen lg:p-8">
+                <div className="w-full max-w-md lg:py-8">
+                    <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6 sm:mb-8 text-center">Create Account</h2>
 
                     {successMessage && (
                         <div className="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
@@ -143,28 +143,30 @@ const RegisterPage = () => {
 
                     <form onSubmit={handleSubmit} className="space-y-5">
                         {/* First Name */}
-                        <FormInput
-                            id="first_name"
-                            label="First Name"
-                            type="text"
-                            value={formData.first_name}
-                            onChange={handleChange}
-                            error={errors.first_name}
-                            placeholder="John"
-                            name="first_name"
-                        />
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <FormInput
+                                id="first_name"
+                                label="First Name"
+                                type="text"
+                                value={formData.first_name}
+                                onChange={handleChange}
+                                error={errors.first_name}
+                                placeholder="John"
+                                name="first_name"
+                            />
 
-                        {/* Last Name */}
-                        <FormInput
-                            id="last_name"
-                            label="Last Name"
-                            type="text"
-                            value={formData.last_name}
-                            onChange={handleChange}
-                            error={errors.last_name}
-                            placeholder="Doe"
-                            name="last_name"
-                        />
+                            {/* Last Name */}
+                            <FormInput
+                                id="last_name"
+                                label="Last Name"
+                                type="text"
+                                value={formData.last_name}
+                                onChange={handleChange}
+                                error={errors.last_name}
+                                placeholder="Doe"
+                                name="last_name"
+                            />
+                        </div>
 
                         {/* Email */}
                         <FormInput
@@ -229,7 +231,7 @@ const RegisterPage = () => {
                         </div>
 
                         {/* Submit Button */}
-                        <LoadingButton loading={loading} className={"w-full bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 mt-6"
+                        <LoadingButton loading={loading} className={"w-full bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white font-semibold py-3 px-4 rounded-lg transition duration-200 mt-6"
                         }>
                             Create Account
                         </LoadingButton>
@@ -238,9 +240,9 @@ const RegisterPage = () => {
                     {/* Login Link */}
                     <p className="text-center text-gray-600 mt-6">
                         Already have an account?{' '}
-                        <a onClick={()=>{navigate("/login")}} className="text-blue-600 hover:text-blue-700 font-semibold cursor-pointer">
+                        <button type="button" onClick={() => navigate("/login")} className="text-blue-600 hover:text-blue-700 font-semibold cursor-pointer">
                             Login here
-                        </a>
+                        </button>
                     </p>
                 </div>
             </div>
