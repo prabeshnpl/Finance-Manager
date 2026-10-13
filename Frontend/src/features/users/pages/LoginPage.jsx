@@ -74,21 +74,21 @@ const LoginPage = () => {
     };
 
     return (
-        <div className="grid grid-cols-2 gap-0 h-screen overflow-hidden">
+        <div className="min-h-screen lg:grid lg:grid-cols-2 lg:h-screen lg:overflow-hidden">
             {/* Left Side - Welcome Section */}
-            <div className="bg-linear-to-br from-blue-500 to-blue-600 flex flex-col justify-center items-center text-white p-8">
+            <div className="bg-linear-to-br from-blue-500 to-blue-600 flex flex-col justify-center items-center text-white px-5 py-7 sm:p-8 lg:min-h-screen">
                 <div className="text-center">
-                    <h1 className="text-5xl font-bold mb-4">Welcome Back</h1>
-                    <p className="text-xl opacity-90">Login to your account to continue</p>
+                    <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-2 sm:mb-4">Welcome Back</h1>
+                    <p className="text-base sm:text-xl opacity-90">Login to your account to continue</p>
                 </div>
             </div>
 
             {/* Right Side - Login Form */}
-            <div className="flex flex-col items-center justify-center p-8 bg-gray-50 overflow-y-auto h-screen">
+            <div className="flex flex-col items-center justify-center px-4 py-8 sm:px-8 sm:py-10 bg-gray-50 lg:overflow-y-auto lg:h-screen lg:p-8">
                 <div className="w-full max-w-md">
-                    <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">Login</h2>
+                    <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6 sm:mb-8 text-center">Login</h2>
 
-                    <form onSubmit={handleSubmit} className="space-y-6">
+                    <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
                         {/* Email Input */}
                         <FormInput
                             id="email"
@@ -114,7 +114,7 @@ const LoginPage = () => {
                         />
 
                         {/* Remember Me & Forgot Password */}
-                        <div className="flex justify-between items-center text-sm">
+                        <div className="flex flex-wrap justify-between items-center gap-3 text-sm">
                             <label className="flex items-center">
                                 <input type="checkbox" className="mr-2 cursor-pointer" />
                                 <span className="text-gray-700">Remember me</span>
@@ -125,7 +125,7 @@ const LoginPage = () => {
                         </div>
 
                         {/* Submit Button */}
-                        <LoadingButton loading={loading} className={"w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 cursor-pointer"
+                        <LoadingButton loading={loading} className={"w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-semibold py-3 px-4 rounded-lg transition duration-200 cursor-pointer"
                         }>
                             Login
                         </LoadingButton>
@@ -135,9 +135,9 @@ const LoginPage = () => {
                     {/* Sign Up Link */}
                     <p className="text-center text-gray-600 mt-6">
                         Don't have an account?{' '}
-                        <a onClick={goToRegister} className="text-blue-600 hover:text-blue-700 font-semibold cursor-pointer">
+                        <button type="button" onClick={goToRegister} className="text-blue-600 hover:text-blue-700 font-semibold cursor-pointer">
                             Sign up here
-                        </a>
+                        </button>
                     </p>
                 </div>
             </div>

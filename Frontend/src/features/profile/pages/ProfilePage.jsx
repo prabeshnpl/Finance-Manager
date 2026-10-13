@@ -30,7 +30,7 @@ export const ProfilePage = () => {
   return (
     <>
       {/* Header */}
-      <div>
+      <div className="hidden sm:block">
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Profile</h1>
         <p className="text-gray-600 mt-1">
           Manage your personal information and security settings

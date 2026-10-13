@@ -46,7 +46,7 @@ export const Dashboard = () => {
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 xl:grid-cols-4">
         <StatsCard
           title="Active Tasks"
           value={sectionStatus.tasks.isLoading ? '...' : safeMetrics.cards.activeTasks}
@@ -107,7 +107,7 @@ export const Dashboard = () => {
           }
         />
       </div>
-
+      
       <QuickActions />
 
       <div className="grid grid-cols-1 gap-6 xl:grid-cols-5">
