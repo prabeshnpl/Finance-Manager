@@ -16,7 +16,7 @@ export const AppLayout = () => {
       <div className="flex min-h-0 flex-1 overflow-hidden">
         <Sidebar isOpen={showSidebar} onClose={() => setShowSidebar(false)} />
         <main className="min-w-0 flex-1 overflow-x-hidden overflow-y-auto bg-yellow-50 scrollbar-hide">
-          <div className="mx-auto w-full max-w-400 space-y-5 p-3 sm:space-y-6 sm:p-5 lg:p-8">
+          <div className="mx-auto w-full max-w-400 space-y-2 p-3 sm:space-y-6 sm:p-5 lg:p-8">
             <Outlet />
           </div>
         </main>
