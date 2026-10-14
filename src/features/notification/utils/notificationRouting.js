@@ -1,5 +1,5 @@
 export const getNotificationRoute = (notification) => {
-  const { source_type, source_id, notification_type } = notification;
+  const { source_type, source_id } = notification;
 
   switch (source_type) {
     case 'task':
@@ -13,7 +13,7 @@ export const getNotificationRoute = (notification) => {
 
     case 'finance':
     case 'transaction':
-      return `/finance?tab=transactions&transactionId=${source_id}`;
+      return `/transactions?transactionId=${source_id}`;
 
     case 'organization':
     case 'member':

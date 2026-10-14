@@ -12,7 +12,7 @@ import SearchBar from '../../../shared/components/Search/SearchBar';
 import { useTasks } from '../hooks/useTasks';
 import FilterModal from '../components/FilterModal';
 
-const TasksPage = () => {
+export const TasksPage = () => {
   const {
     filters,
     setFilters,

@@ -24,7 +24,7 @@ const redirectToLogin = () => {
 /* ---------------------------------------
    Axios Instance
 --------------------------------------- */
-const api = axios.create({
+export const api = axios.create({
   baseURL: BASE_URL,
   timeout: 10000,
   headers: {

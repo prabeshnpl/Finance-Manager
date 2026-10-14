@@ -6,7 +6,7 @@ import { authService } from '../services/authService';
 import LoadingButton from '../../../shared/components/LoadingButton';
 import ErrorMessage from "../../../shared/components/Error/ErrorMessage"
 
-const LoginPage = () => {
+export const LoginPage = () => {
     const [formData, setFormData] = useState({
         email: '',
         password: '',

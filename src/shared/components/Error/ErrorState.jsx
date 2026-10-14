@@ -1,6 +1,6 @@
 import { AlertTriangle } from "lucide-react"; // or any icon library
 
-const ErrorState = ({ 
+export const ErrorState = ({ 
   message = "Something went wrong while loading data.", 
   onRetry 
 }) => {
