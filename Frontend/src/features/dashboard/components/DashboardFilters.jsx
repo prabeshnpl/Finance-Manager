@@ -9,7 +9,7 @@ export const DashboardFilters = ({
   accountsData,
 }) => {
   return (
-    <div className="sticky top-0 z-30 grid grid-cols-2 items-center gap-1 rounded-xl border border-slate-200 bg-white/95 p-2 shadow-sm backdrop-blur sm:flex sm:justify-between sm:gap-4 sm:rounded-2xl sm:p-4 lg:p-5">
+    <div className="sticky top-0 z-30 grid grid-cols-2 items-center gap-1 rounded-xl border border-slate-200 bg-white/95 px-2 py-1 shadow-sm backdrop-blur sm:flex sm:justify-between sm:gap-4 sm:rounded-2xl sm:p-4 lg:p-5">
       
       <h1 className="min-w-0 whitespace-nowrap text-sm font-bold leading-tight text-slate-900 sm:text-xl lg:text-2xl">
         Financial overview

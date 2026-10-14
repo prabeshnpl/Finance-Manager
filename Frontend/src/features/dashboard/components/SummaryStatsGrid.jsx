@@ -29,25 +29,27 @@ export const SummaryStatsGrid = ({
       trend: summaryData?.expenses_trend,
     },
     {
-      title: "Total Balance",
+      title: "Balance",
       value: formatCurrency(summaryData?.balance || 0),
       color: Number(summaryData?.balance || 0) >= 0 ? "blue" : "red",
     },
   ];
 
   return (
-    <div className="grid gap-3 grid-cols-2 sm:gap-4 xl:grid-cols-3">
+    <div className="grid gap-2 grid-cols-3 sm:gap-4 xl:grid-cols-3">
       {stats.map((stat) => {
         return (
-          <div key={stat.title} className="min-w-0 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
-            <div className="flex min-w-0 items-start justify-between gap-3">
-              <div className="min-w-0">
-                <p className="text-sm font-medium text-slate-500">{stat.title}</p>
+          <div key={stat.title} className="min-w-0 rounded-2xl border border-slate-200 bg-white pl-3 pr-1 py-2 shadow-sm sm:p-5">
+            <div className="flex-col min-w-0 items-start justify-between gap-3">
+              
+              <p className="text-xs sm:text-base font-bold text-slate-500">{stat.title}</p>
+
+              <div className="shrink-0 rounded-xl">
                 <p className="mt-2 wrap-break-word text-sm font-bold text-slate-900 sm:text-2xl">
                   Rs.{stat.value}
                 </p>
                 {stat.trend && (
-                  <div className="mt-2 flex flex-wrap items-center gap-1 text-xs sm:text-sm">
+                  <div className="mt-2 flex items-center gap-1 text-[0.625rem] sm:text-sm">
                     {stat.trend.positive ? (
                       <ArrowUpRight className="h-4 w-4 text-emerald-600" />
                     ) : (
@@ -56,12 +58,8 @@ export const SummaryStatsGrid = ({
                     <span className={stat.trend.positive ? "text-emerald-700" : "text-rose-700"}>
                       {stat.trend.value}
                     </span>
-                    <span className="text-slate-500">vs last period</span>
                   </div>
                 )}
-              </div>
-              <div className={`shrink-0 rounded-xl p-2 ${colorClasses[stat.color]}`}>
-                <ArrowUpRight className="h-5 w-5" aria-hidden="true" />
               </div>
             </div>
           </div>
