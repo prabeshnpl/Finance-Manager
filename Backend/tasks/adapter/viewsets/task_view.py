@@ -39,13 +39,6 @@ class TaskView(BaseTenantModelViewSet):
         if isinstance(entities, Response):
             return entities
         
-        serializer = self.get_serializer(
-            entities, many=True, 
-            context={
-                "timezone": request.headers.get("X-Timezone"), 
-                "request":request
-            }
-        )
         page = self.paginate_queryset(entities)
 
         serializer = self.get_serializer(
@@ -56,7 +49,9 @@ class TaskView(BaseTenantModelViewSet):
             }
         )
 
-        return self.get_paginated_response(serializer.data)
+        response = self.get_paginated_response(serializer.data)
+        response.data["total_count"] = len(entities)
+        return response
        
     def destroy(self, request, pk):
         usecase = DeleteTaskUseCase(repo=self.repository())
