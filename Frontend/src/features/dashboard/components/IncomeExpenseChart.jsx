@@ -14,7 +14,7 @@ import {
 import { formatCompactCurrency, periodLabelMap } from "../utils";
 import { formatCurrency } from "@/shared/utils/formatCurrency";
 
-export const TrendChartCard = ({
+export const IncomeExpenseChart = ({
   period,
   categoryId,
   accountId,

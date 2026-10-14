@@ -6,7 +6,7 @@ import { requestAndSaveFcmToken } from "../../../shared/utils/fcm";
 import { normalizeTrendData } from "../utils";
 import { DashboardFilters } from "../components/DashboardFilters";
 import { SummaryStatsGrid } from "../components/SummaryStatsGrid";
-import { TrendChartCard } from "../components/TrendChartCard";
+import { IncomeExpenseChart } from "../components/IncomeExpenseChart";
 import { PieChartCard } from "../components/PieChartCard";
 import { AnalyticalHighlightsCard } from "../components/AnalyticalHighlightsCard";
 import { InsightsCard } from "../components/InsightsCard";
@@ -101,7 +101,7 @@ export const DashboardPage = () => {
       />
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        <TrendChartCard
+        <IncomeExpenseChart
           period={period}
           categoryId={categoryId}
           accountId={accountId}
