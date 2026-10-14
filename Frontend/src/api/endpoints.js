@@ -15,14 +15,14 @@ export const ENDPOINTS = {
   MEMBERS: '/member',
 
   // Finance
-  FINANCE_TRANSACTIONS: '/finance/transaction',
-  FINANCE_ACCOUNTS: '/finance/account',
-  FINANCE_SUMMARY: '/finance/summary',
-  FINANCE_REPORTS: '/finance/reports',
-  FINANCE_CATEGORY_BREAKDOWN: '/finance/category/breakdown',
-  FINANCE_MEMBER_BREAKDOWN: '/member/breakdown',
-  FINANCE_CATEGORIES: '/finance/category',
-  FINANCE_EXPORT: '/finance/export',
+  TRANSACTION: '/finance/transaction',
+  ACCOUNT: '/finance/account',
+  SUMMARY: '/finance/summary',
+  REPORT: '/finance/reports',
+  CATEGORY_BREAKDOWN: '/finance/category/breakdown',
+  MEMBER_BREAKDOWN: '/member/breakdown',
+  CATEGORY: '/finance/category',
+  EXPORT: '/finance/export',
 
   // Tasks
   TASKS: '/tasks',

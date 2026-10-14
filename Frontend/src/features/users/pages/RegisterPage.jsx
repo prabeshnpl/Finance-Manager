@@ -4,10 +4,10 @@ import PasswordStrengthIndicator from '../../../shared/components/PasswordStreng
 import { useNavigate } from 'react-router-dom';
 import { authService } from '../services/authService';
 import { useAuthStore } from '../../../stores/authStore';
-import ErrorMessage from "../../../shared/components/Error/ErrorMessage"
-import LoadingButton from '../../../shared/components/LoadingButton';
+import { ErrorMessage } from "../../../shared/components/Error/ErrorMessage"
+import { LoadingButton } from '../../../shared/components/LoadingButton';
 
-const RegisterPage = () => {
+export const RegisterPage = () => {
     const [formData, setFormData] = useState({
         first_name: '',
         last_name: '',

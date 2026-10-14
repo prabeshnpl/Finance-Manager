@@ -3,7 +3,7 @@ import { useErrorStore } from "../../../stores/errorStore";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
-const ErrorMessage = () => {
+export const ErrorMessage = () => {
   const { error, clearError } = useErrorStore();
   const location = useLocation();
 

@@ -4,6 +4,7 @@ export const ConfirmationDialog = ({
   title = 'Confirm action',
   message,
   confirmLabel = 'Confirm',
+  confirmVariant = 'primary',
   cancelLabel = 'Cancel',
   onConfirm,
   onCancel,
@@ -27,7 +28,7 @@ export const ConfirmationDialog = ({
         <Button variant="secondary" onClick={onCancel}>
           {cancelLabel}
         </Button>
-        <Button onClick={onConfirm}>{confirmLabel}</Button>
+        <Button variant={confirmVariant} onClick={onConfirm}>{confirmLabel}</Button>
       </div>
     </div>
   </div>

@@ -4,7 +4,7 @@ import { AppLayout } from './shared/layout/AppLayout';
 import { useOrganizationstore } from './features/organization/hooks/useOrganizationstore';
 import { Spinner } from './shared/components/Spinner';
 
-function App() {
+export const App = () => {
   const { activeOrganization, loadOrganizations, loading } = useOrganizationstore();
   const [organizationsLoaded, setOrganizationsLoaded] = useState(false);
   const [loadError, setLoadError] = useState(null);

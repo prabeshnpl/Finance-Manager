@@ -1,82 +1,37 @@
-import React, { useRef, useState } from 'react';
-import { TabPanel } from '../../../../shared/components/tabs/Tabs';
-import { CategoryManager } from '../Category/CategoryManager';
-import { AccountPage } from '../Account/AccountPage';
+import { useRef } from 'react';
+import { CategoryManager } from '@/features/category/pages/CategoryManager';
 import { Button } from '../../../../shared/components/Button';
-import { Plus } from 'lucide-react';
+import { Plus, Tag } from 'lucide-react';
 
 export const FinanceSettings = () => {
 
-    const [activeTab, setActiveTab] = useState('account');
     const categoryAddActionRef = useRef(null);
 
-    const tabs = [
-        {
-        id: 'account',
-        label: 'Accounts'
-        },
-        {
-        id: 'category',
-        label: 'Category'
-        },
-    ];
-
     return (
-        <div className='h-full flex flex-col overflow-hidden'>
-            <div className="flex items-center gap-3 border-b border-gray-300">
-              <nav className="flex flex-1 min-w-0 space-x-8" aria-label="Finance settings tabs">
-                {tabs.map((tab) => {
-                  const isActive = activeTab === tab.id;
-
-                  return (
-                    <button
-                      key={tab.id}
-                      onClick={() => setActiveTab(tab.id)}
-                      className={`
-                        flex items-center space-x-2 py-4 px-1 border-b-2 
-                        font-medium text-sm transition-colors cursor-pointer
-                        ${
-                          isActive
-                            ? 'border-blue-500 text-blue-600'
-                            : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                        }
-                      `}
-                    >
-                      <span>{tab.label}</span>
-                    </button>
-                  );
-                })}
-              </nav>
-              {activeTab === 'category' && (
+        <section className="space-y-6">
+            <header className="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:p-6">
+              <div className="flex items-start gap-3">
+                <div className="rounded-xl bg-blue-50 p-2.5 text-blue-700">
+                  <Tag className="h-5 w-5" aria-hidden="true" />
+                </div>
+                <div>
+                  <h1 className="text-xl font-bold text-slate-900 sm:text-2xl">Settings</h1>
+                  <p className="mt-1 text-sm text-slate-600">Manage the categories used to organize your finances.</p>
+                </div>
+              </div>
                 <Button
                   size="sm"
                   onClick={() => categoryAddActionRef.current?.()}
-                  className="h-10 px-2 py-1 text-xs inline-flex items-center shrink-0 whitespace-nowrap"
+                  className="h-10 w-full shrink-0 px-3 text-sm sm:w-auto"
                 >
-                  <span className="inline-flex items-center gap-1">
-                    <Plus className="h-3.5 w-3.5" />
+                  <span className="inline-flex items-center gap-2">
+                    <Plus className="h-4 w-4" />
                     Add Category
                   </span>
                 </Button>
-              )}
-            </div>
-
-            <div className='mt-4 flex-1 min-h-0 overflow-hidden'>
-
-                <TabPanel isActive={activeTab === 'account'}>
-                  <div className="h-full overflow-y-auto pr-1">
-                    <AccountPage />
-                  </div>
-                </TabPanel>
-
-                <TabPanel isActive={activeTab === 'category'}>
-                  <div className="h-full pr-1">
-                    <CategoryManager addActionRef={categoryAddActionRef} />
-                  </div>
-                </TabPanel>
-
-            </div>
-        </div>
+            </header>
+            <CategoryManager addActionRef={categoryAddActionRef} />
+        </section>
     )
 };
 export default FinanceSettings;

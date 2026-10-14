@@ -3,7 +3,7 @@ import { useRoadmap } from '../hooks/useRoadmap';
 import { RoadmapList } from '../components/roadmap/RoadmapList';
 import { RoadmapDetailModal } from '../components/roadmap/RoadmapDetailModal';
 
-const RoadmapPage = () => {
+export const RoadmapPage = () => {
   const {
     filters,
     setFilters,

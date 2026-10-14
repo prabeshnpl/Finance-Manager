@@ -1,4 +1,4 @@
-function LoadingButton({ loading, className, children }) {
+export const LoadingButton = ({ loading, className, children }) => {
 
   return (
     <button

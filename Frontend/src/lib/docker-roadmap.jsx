@@ -307,7 +307,7 @@ const resources = [
   { label: "Awesome Docker", url: "github.com/veggiemonk/awesome-docker", icon: "⭐" },
 ];
 
-export default function DockerRoadmap() {
+export const DockerRoadmap = () =>   {
   const [activeStage, setActiveStage] = useState(0);
   const [activeDay, setActiveDay] = useState(0);
   const [tab, setTab] = useState("topics");
