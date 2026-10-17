@@ -3,6 +3,7 @@ import { Button } from '@/shared/components/Button';
 import { X } from 'lucide-react';
 import { Spinner } from '@/shared/components/Spinner';
 import { AddCategoryModal } from '@/features/category/components/AddCategoryModal';
+import { useAddTransaction } from '../hooks/useAddTransaction';
 
 export const AddTransactionModal = ({ 
   onClose, 
@@ -21,6 +22,7 @@ export const AddTransactionModal = ({
     account: '',
     to_account: '',
     occurred_at: '',
+    initiated_by:'',
     description: '',
   });
 
@@ -29,6 +31,7 @@ export const AddTransactionModal = ({
   const [error, setError] = useState(null);
   const {data:categoriesData, isLoading:categoriesLoading, error:categoriesError} = categories;
   const {data:accountsData, isLoading:accountsLoading, error:accountsError} = accounts;
+  const { members } = useAddTransaction();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -173,7 +176,7 @@ export const AddTransactionModal = ({
 
             </div>
 
-            {/* Accounts */}
+            {/* From Account and Initiated By */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               
               <div>
@@ -199,6 +202,33 @@ export const AddTransactionModal = ({
                     accountsData.map((acc) => (
                       <option key={acc.id} value={acc.id} className={formData.transaction_type === 'transfer' && formData.to_account == acc.id ? 'text-gray-400' : 'text-gray-900'} disabled={formData.transaction_type === 'transfer' && formData.to_account == acc.id}>
                         {acc.name}
+                      </option>
+                    ))
+                  )}
+                </select>
+              </div>
+
+              <div>
+                <label className="block font-medium text-gray-900 mb-2">Initiated By</label>
+                <select
+                  required
+                  onChange={(e) => setFormData({ ...formData, initiated_by: e.target.value })}
+                  className="w-full px-4 py-2 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 invalid:text-gray-400"
+                  disabled={loading}
+                >
+                  <option value="" selected disabled>Select Member</option>
+                  {members?.isLoading ? (
+                    <option>
+                      <div className="flex items-center justify-center py-12">
+                        <Spinner size="lg" />
+                      </div>
+                    </option>
+                  ) : members?.error ? (
+                    <option>Error loading accounts</option>
+                  ) : (
+                    members?.data.map((member) => (
+                      <option key={member.id} value={member.id}>
+                        {member?.user?.first_name} {member?.user?.last_name}
                       </option>
                     ))
                   )}

@@ -19,6 +19,11 @@ export const transactionService = {
     api.get(`${ENDPOINTS.TRANSACTION}/${id}/`),
 
   getAccounts: (params) => 
-    api.get(`${ENDPOINTS.ACCOUNT}`, {params}),
+    api.get(`${ENDPOINTS.ACCOUNT}/`, {params}),
 
+  getCategories: (params) => 
+    api.get(`${ENDPOINTS.CATEGORY}/`, {params}),
+
+  getMembers: (params) => 
+    api.get(`${ENDPOINTS.MEMBERS}/`, {params}),
 }

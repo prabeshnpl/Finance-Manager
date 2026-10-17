@@ -12,7 +12,7 @@ export const Card = ({ children, className = '', title, action }) => {
         </div>
       )}
 
-      <div className="h-full min-w-0 p-4 sm:p-6">{children}</div>
+      <div className="h-full min-w-0 p-2 sm:p-6">{children}</div>
 
     </div>
   );
