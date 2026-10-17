@@ -54,7 +54,7 @@ export const TaskCard = ({ task, onUpdate, onDelete, onClick, onEdit }) => {
 
   return (
     <div 
-      className={`bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow cursor-pointer border-l-4 ${
+      className={`bg-white rounded-lg shadow-md p-2 sm:p-4 hover:shadow-lg transition-shadow cursor-pointer border-l-4 ${
         isOverdue() ? 'border-red-500' : 'border-transparent'
       }`}
       onClick={onClick}
@@ -72,13 +72,13 @@ export const TaskCard = ({ task, onUpdate, onDelete, onClick, onEdit }) => {
             <StatusIcon className={`h-5 w-5 ${statusColors[task.status]}`} />
           </button>
           <div className="flex-1 min-w-0">
-            <h3 className={`font-semibold text-gray-900 ${
+            <p className={`font-semibold text-gray-900 text-sm sm:text-base ${
               task.status === 'completed' ? 'line-through text-gray-500' : ''
             }`}>
               {task.title}
-            </h3>
+            </p>
             {task.description && (
-              <p className="text-sm text-gray-600 mt-1 line-clamp-2">
+              <p className="text-[12px] sm:text-sm text-gray-600 mt-1 line-clamp-2">
                 {task.description}
               </p>
             )}

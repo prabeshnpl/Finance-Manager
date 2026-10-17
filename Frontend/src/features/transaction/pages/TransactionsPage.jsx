@@ -76,11 +76,11 @@ export const TransactionsPage = () => {
         action={
           <>
             <SearchBar
-                placeholder="Search..."
-                value={filters.search || ''}
-                onSubmit={(value) => setFilters({ ...filters, search: value || null })}
-                className="w-1/2 min-w-0 md:w-56 md:flex-1 md:max-w-md"
-              />
+              placeholder="Search..."
+              value={filters.search || ''}
+              onSubmit={(value) => setFilters({ ...filters, search: value || null })}
+              className="w-1/2 min-w-0 md:w-56 md:flex-1 md:max-w-md"
+            />
 
             <Button
               size="xs"
@@ -100,7 +100,7 @@ export const TransactionsPage = () => {
               title="Add Transaction"
             >
               <Plus className="h-4 w-4"/>
-              <span className="hidden sm:inline ml-1">Add</span>
+              <span className="hidden sm:inline ml-1">New</span>
             </Button>
           </>
         }

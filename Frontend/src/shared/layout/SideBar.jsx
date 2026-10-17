@@ -64,7 +64,7 @@ export const Sidebar = ({ isOpen, onClose }) => {
       />
 
       <aside className={`fixed top-0 left-0 z-50 flex h-full w-64 shrink-0 flex-col overflow-y-auto border-r border-slate-200 bg-white transform md:relative md:translate-x-0 transition-transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0`}>
-        <nav className="flex-1 space-y-1 px-3 py-5">
+        <nav className="flex-1 px-3 py-5">
           <div className="flex items-center justify-between mb-4 md:hidden">
             <h3 className="text-lg font-semibold text-slate-900">Menu</h3>
             <button type="button" onClick={onClose} aria-label="Close navigation menu" className="p-2 rounded-lg hover:bg-gray-200">

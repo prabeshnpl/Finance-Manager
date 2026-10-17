@@ -30,6 +30,9 @@ export const AddTransactionModal = ({
   const {data:categoriesData, isLoading:categoriesLoading, error:categoriesError} = categories;
   const {data:accountsData, isLoading:accountsLoading, error:accountsError} = accounts;
 
+  // if (error){
+    console.log(categories)
+  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
@@ -87,10 +90,10 @@ export const AddTransactionModal = ({
                   className="w-full px-4 py-2 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 invalid:text-gray-400"
                   disabled={loading}
                 >
-                  <option value="" selected disabled>Select Type</option>
-                  <option value="income" class="text-gray-900">Income</option>
-                  <option value="expense" class="text-gray-900">Expense</option>
-                  <option value="transfer" class="text-gray-900">Transfer</option>
+                  <option value="dw" selected disabled>Select Type</option>
+                  <option value="income" className="text-gray-900">Income</option>
+                  <option value="expense" className="text-gray-900">Expense</option>
+                  <option value="transfer" className="text-gray-900">Transfer</option>
                 </select>
               </div>
 
