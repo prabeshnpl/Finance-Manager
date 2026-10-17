@@ -48,50 +48,47 @@ export const TasksPage = () => {
     <>
       <Card>
         {/* Tabs */}
-        <div className='flex justify-between items-center'>
+        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <Tabs tabs={tabs} activeTab={activeTab} onChange={setActiveTab} />
-          <div className="flex flex-wrap gap-6">
-
-            <Button
-              size="sm"
-              variant="ghost"
-              onClick={() => setShowFilters(!showFilters)}
-            >
-              <Filter className="h-4 w-4 mr-2" />
-              Filter
-            </Button>
-
-            {/* Filters */}
-            <FilterModal
-              show={showFilters}
-              onClose={() => setShowFilters(false)}
-              filters={filters}
-              setFilters={setFilters}
-            />
-
+          <div className="grid w-full grid-cols-2 gap-2 md:flex md:w-auto md:flex-wrap md:items-center">
             <SearchBar
               placeholder="Search tasks..."
               value={filters.search || ''}
               onSubmit={(value) => setFilters({ ...filters, search: value || null })}
-              className="max-w-md h-10"
+              className="col-span-2 h-10 w-full min-w-0 md:col-span-1 md:w-56"
             />
-
+            <Button
+              size="sm"
+              variant="ghost"
+              onClick={() => setShowFilters(!showFilters)}
+              className="w-full justify-center md:w-auto"
+            >
+              <Filter className="h-4 w-4 mr-2" />
+              Filter
+            </Button>
             <Button 
               size="sm"
               onClick={() => {
                 setEditingTask(null);
                 setShowAddModal(true);
               }}
-              className='w-30 h-10 flex justify-center items-center'
+              className="h-10 w-full justify-center md:w-auto"
             >
               <Plus className="h-4 w-4 mr-2" />
-              <span className="hidden sm:inline">Add Task</span>
+              <span>Add Task</span>
             </Button>
           </div>
+          {/* Filters */}
+          <FilterModal
+            show={showFilters}
+            onClose={() => setShowFilters(false)}
+            filters={filters}
+            setFilters={setFilters}
+          />
         </div>
 
         {/* Content */}
-        <div className='mt-10'>
+        <div className="mt-5 sm:mt-10">
           <TabPanel isActive={activeTab === 'list'}>
             <TasksList
               infiniteTasks={infiniteTasks}

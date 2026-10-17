@@ -36,20 +36,19 @@ export const SummaryStatsGrid = ({
   ];
 
   return (
-    <div className="grid gap-2 grid-cols-3 sm:gap-4 xl:grid-cols-3">
+    <div className="grid gap-2 grid-cols-3 sm:gap-4">
       {stats.map((stat) => {
         return (
-          <div key={stat.title} className="min-w-0 rounded-2xl border border-slate-200 bg-white pl-3 pr-1 py-2 shadow-sm sm:p-5">
-            <div className="flex-col min-w-0 items-start justify-between gap-3">
-              
+          <div key={stat.title} className="min-w-0 rounded-2xl border border-slate-200 bg-white pl-3 pr-1 py-2 shadow-sm sm:px-5 flex-col">
+
               <p className="text-xs sm:text-base font-bold text-slate-500">{stat.title}</p>
 
               <div className="shrink-0 rounded-xl">
-                <p className="mt-2 wrap-break-word text-sm font-bold text-slate-900 sm:text-2xl">
+                <p className="wrap-break-word text-sm font-bold text-slate-900 sm:text-2xl">
                   Rs.{stat.value}
                 </p>
                 {stat.trend && (
-                  <div className="mt-2 flex items-center gap-1 text-[0.625rem] sm:text-sm">
+                  <div className="mt-1 flex items-center gap-1 text-[0.625rem] sm:text-sm">
                     {stat.trend.positive ? (
                       <ArrowUpRight className="h-4 w-4 text-emerald-600" />
                     ) : (
@@ -61,7 +60,7 @@ export const SummaryStatsGrid = ({
                   </div>
                 )}
               </div>
-            </div>
+            
           </div>
         );
       })}

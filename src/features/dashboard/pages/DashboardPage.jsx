@@ -37,8 +37,11 @@ export const DashboardPage = () => {
   } = summary;
 
   const {
-    data: trendResponse,
+    data: trendPages,
     isLoading: trendLoading,
+    isFetchingNextPage: isFetchingOlderTrend,
+    hasNextPage: hasOlderTrend,
+    fetchNextPage: fetchOlderTrend,
     error: trendError,
     refetch: refetchTrend,
   } = incomeExpenseTrend;
@@ -46,22 +49,28 @@ export const DashboardPage = () => {
   const { data: categoriesData } = categories;
   const { data: accountsData } = accounts;
 
-  const chartData = normalizeTrendData(
-    trendResponse?.series || trendResponse?.data || []
+  const latestTrendData = trendPages?.pages?.[0];
+  const latestChartData = normalizeTrendData(
+    latestTrendData?.series || latestTrendData?.data || []
   );
-  const totalIncomeFromSeries = chartData.reduce(
+  const chartData = trendPages?.pages
+    ? [...trendPages.pages]
+        .reverse()
+        .flatMap((page) => normalizeTrendData(page?.series || page?.data || []))
+    : [];
+  const totalIncomeFromSeries = latestChartData.reduce(
     (sum, row) => sum + row.income,
     0
   );
-  const totalExpenseFromSeries = chartData.reduce(
+  const totalExpenseFromSeries = latestChartData.reduce(
     (sum, row) => sum + row.expense,
     0
   );
-  const avgIncomePerBucket = chartData.length
-    ? totalIncomeFromSeries / chartData.length
+  const avgIncomePerBucket = latestChartData.length
+    ? totalIncomeFromSeries / latestChartData.length
     : 0;
-  const avgExpensePerBucket = chartData.length
-    ? totalExpenseFromSeries / chartData.length
+  const avgExpensePerBucket = latestChartData.length
+    ? totalExpenseFromSeries / latestChartData.length
     : 0;
 
   if (summaryLoading) {
@@ -100,7 +109,7 @@ export const DashboardPage = () => {
         totalExpenseFromSeries={totalExpenseFromSeries}
       />
 
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.7fr)_minmax(260px,0.8fr)]">
         <IncomeExpenseChart
           period={period}
           categoryId={categoryId}
@@ -109,6 +118,10 @@ export const DashboardPage = () => {
           trendError={trendError}
           refetchTrend={refetchTrend}
           chartData={chartData}
+          trendPageCount={trendPages?.pages?.length || 0}
+          isFetchingOlderTrend={isFetchingOlderTrend}
+          hasOlderTrend={hasOlderTrend}
+          fetchOlderTrend={fetchOlderTrend}
         />
         <PieChartCard />
       </div>

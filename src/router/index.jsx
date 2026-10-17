@@ -6,7 +6,7 @@ import { ErrorMessage } from "@/shared/components/Error/ErrorMessage";
 import { authLoader } from "./authLoader";
 import { OrganizationPage } from "@/features/organization/pages/OrganizationPage";
 import { DashboardPage } from "@/features/dashboard/pages/DashboardPage";
-import { TransactionsList } from "@/features/transaction/pages/TransactionsList";
+import { TransactionsPage } from "@/features/transaction/pages/TransactionsPage";
 import { ReportsPage } from "@/features/report/pages/ReportPage";
 import { AccountPage } from "@/features/account/pages/AccountPage";
 import { FinanceSettings } from "@/features/finance/components/Settings/FinanceSettings";
@@ -26,8 +26,7 @@ export const router = createBrowserRouter([
       { path: "dashboard", element: <DashboardPage /> },
       { path: "tasks", element: <TasksPage /> },
       { path: "roadmaps", element: <RoadmapPage /> },
-      // { path: "finance", element: <FinancePage /> },
-      { path: "transactions", element: <TransactionsList /> },
+      { path: "transactions", element: <TransactionsPage /> },
       { path: "reports", element: <ReportsPage /> },
       { path: "accounts", element: <AccountPage /> },
       { path: "settings", element: <FinanceSettings /> },

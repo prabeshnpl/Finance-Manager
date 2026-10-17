@@ -4,7 +4,7 @@ import { Button } from '@/shared/components/Button';
 import { EmptyState } from '@/shared/components/EmptyState';
 import { TransactionCard } from '../components/TransactionCard';
 import { AddTransactionModal } from '../components/AddTransactionModal';
-import { Plus, Download, Filter, Receipt } from 'lucide-react';
+import { Plus, Filter, Receipt } from 'lucide-react';
 import { Spinner } from '@/shared/components/Spinner';
 import FilterModal from '../components/FilterModal';
 import ErrorState from '@/shared/components/Error/ErrorState';
@@ -12,7 +12,7 @@ import SearchBar from '@/shared/components/Search/SearchBar';
 import { useTransaction } from '../hooks/useTransaction';
 import { useCategory } from '../../category/hooks/useCategory';
 
-export const TransactionsList = () => {
+export const TransactionsPage = () => {
   const {
     useInfiniteTransactions,
     createTransaction,
@@ -69,44 +69,40 @@ export const TransactionsList = () => {
     return <ErrorState message="Failed to load transactions." onRetry={refetch} />;
   }
   return (
-    <div className='mt-5'>
+    <>
       <Card
         // title={`Transactions (${pages?.pages?.at(-1)?.meta?.total_count || 0})`}
         title={`Transactions`}
         action={
-          <div className="flex flex-wrap gap-2 items-center">
+          <>
             <SearchBar
                 placeholder="Search..."
                 value={filters.search || ''}
                 onSubmit={(value) => setFilters({ ...filters, search: value || null })}
-                className="flex-1 min-w-xs sm:max-w-md"
+                className="w-1/2 min-w-0 md:w-56 md:flex-1 md:max-w-md"
               />
 
             <Button
-              size="sm"
+              size="xs"
               variant="ghost"
               onClick={() => setShowFilters(!showFilters)}
               title="Filter"
+              className="flex items-center px-2 py-1 text-xs sm:px-3 sm:py-2 sm:text-sm"
             >
               <Filter className="h-4 w-4" />
-              <span className="hidden sm:inline ml-2">Filter</span>
+              <span className="hidden sm:inline ml-1">Filter</span>
             </Button>
 
-            <Button
-              size="sm"
-              variant="ghost"
-              onClick={exportTransactions}
-              title="Export"
+            <Button 
+              size="xs" 
+              onClick={() => setShowAddModal(true)} 
+              className="flex items-center px-2 py-1 text-xs sm:px-3 sm:py-2 sm:text-sm"
+              title="Add Transaction"
             >
-              <Download className="h-4 w-4" />
-              <span className="hidden sm:inline ml-2">Export</span>
+              <Plus className="h-4 w-4"/>
+              <span className="hidden sm:inline ml-1">Add</span>
             </Button>
-
-            <Button size="sm" onClick={() => setShowAddModal(true)} className="flex items-center">
-              <Plus className="h-6 w-6" />
-              <span className="hidden md:inline ml-2">Add</span>
-            </Button>
-          </div>
+          </>
         }
       >
         {/* Filters */}
@@ -160,6 +156,6 @@ export const TransactionsList = () => {
           accounts={accounts}
         />
       )}
-    </div>
+    </>
   );
 };

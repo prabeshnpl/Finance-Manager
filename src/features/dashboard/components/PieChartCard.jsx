@@ -20,15 +20,15 @@ export const PieChartCard = () => (
       <p className="text-sm text-gray-600">
         Sample preview — category data will be available here in the future.
       </p>
-      <div className="h-64 w-full">
+      <div className="h-52 w-full sm:h-56">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie
               data={sampleData}
               dataKey="value"
               nameKey="name"
-              innerRadius="48%"
-              outerRadius="76%"
+              innerRadius="42%"
+              outerRadius="68%"
               paddingAngle={3}
             >
               {sampleData.map((entry) => (

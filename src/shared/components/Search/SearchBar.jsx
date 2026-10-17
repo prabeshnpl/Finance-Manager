@@ -23,16 +23,20 @@ const SearchBar = ({
 
   return (
     <div
-      className={`flex items-center border border-gray-300 rounded-4xl px-3 py-2 bg-white ${className}`}
+      className={`flex items-center border border-gray-300 rounded-4xl px-3 py-1 sm:pl-5 sm:pr-5 sm:py-2 bg-white ${className}`}
     >
-      <Search className=" w-8 text-black mr-2" />
       <input
         type="text"
         value={barValue}
         onChange={(e) => handleChange(e.target.value)}
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
-        className="w-full focus:outline-none focus:ring-0 text-sm"
+        className="w-full focus:outline-none focus:ring-0 text-xs sm:text-base"
+      />
+
+      <Search 
+        className={`w-6 sm:w-8 ${barValue ? 'text-blue-500 cursor-pointer' : 'text-gray-500'}`} 
+        onClick={() => barValue && onSubmit?.(barValue)}
       />
     </div>
   );
