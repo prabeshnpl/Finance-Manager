@@ -18,7 +18,7 @@ class TransactionViewset(BaseTenantModelViewSet):
 
     def retrieve(self, request, pk:int):
         usecase = GetTransactionByIdUseCase(repo=self.repository())
-        response = usecase.execute(id=pk, organization=request.organization,role=request.role)
+        response = usecase.execute(id=pk, organization=request.organization.id,role=request.role)
         if isinstance(response, Response):
             return response
         response = self.get_serializer(
@@ -34,7 +34,7 @@ class TransactionViewset(BaseTenantModelViewSet):
         usecase = ListTransactionsUseCase(repo=self.repository())
         search_params = {k: v[0] if isinstance(v, list) else v for k, v in request.query_params.items()}
         search_params['user'] = request.user
-        entities = usecase.execute(search_params=search_params, organization=request.organization,role=request.role)
+        entities = usecase.execute(search_params=search_params, organization=request.organization.id,role=request.role)
 
         if isinstance(entities, Response):
             return entities
@@ -55,7 +55,7 @@ class TransactionViewset(BaseTenantModelViewSet):
        
     def destroy(self, request, pk):
         usecase = DeleteTransactionUseCase(repo=self.repository())
-        response = usecase.execute(id=pk, organization=request.organization,role=request.role)
+        response = usecase.execute(id=pk, organization=request.organization.id,role=request.role)
         if isinstance(response, Response):
             return response
         return Response({'detail':"Deleted successfully"})
@@ -70,7 +70,7 @@ class TransactionViewset(BaseTenantModelViewSet):
         serializer = self.get_serializer(data=data)
         serializer.is_valid(raise_exception=True)
         print(serializer.validated_data, flush=True)
-        entity = usecase.execute(data=serializer.validated_data, organization=request.organization,role=request.role)
+        entity = usecase.execute(data=serializer.validated_data, organization=request.organization.id,role=request.role)
 
         if isinstance(entity, Response):
             return entity
@@ -95,7 +95,7 @@ class TransactionViewset(BaseTenantModelViewSet):
         serializer.is_valid(raise_exception=True)
 
         usecase = UpdateTransactionUseCase(repo=self.repository())
-        entity = usecase.execute(id=pk, data=serializer.validated_data, organization=request.organization, role=request.role) # type: ignore
+        entity = usecase.execute(id=pk, data=serializer.validated_data, organization=request.organization.id, role=request.role) # type: ignore
 
         if isinstance(entity, Response):
             return entity

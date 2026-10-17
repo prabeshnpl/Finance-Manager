@@ -1,36 +1,26 @@
-from typing import Optional
+from dataclasses import dataclass
 from datetime import datetime
+from typing import Optional
+from finance.domain.entity.account_entity import AccountEntity
 
+@dataclass
+class UserEntity:
+    id: int
+    first_name: str = ''
+    last_name: str = ''
+
+@dataclass
 class TransactionEntity:
-    def __init__(
-        self,
-        id: int,
-        organization: ['Organization'], # type: ignore
-        account: dict | None, # type: ignore
-        to_account: dict | None, # type: ignore
-        category: dict | None, # type: ignore
-        created_by: ['CustomUser'] = None, # type: ignore
-        initiated_by: ['CustomUser'] = None, # type: ignore
-        amount: float = 0,
-        remaining_balance: float | None = 0,
-        transaction_type: str = "income",
-        occurred_at: Optional[datetime] = None,
-        description: Optional[str] = None,
-        created_at: Optional[datetime] = None,
-    ):
-        self.id = id
-        self.organization = organization
-        self.account = account
-        self.to_account = to_account
-        self.category = category
-        self.created_by = created_by
-        self.initiated_by = initiated_by
-        self.amount = amount
-        self.transaction_type = transaction_type
-        self.occurred_at = occurred_at
-        self.description = description
-        self.created_at = created_at
-        self.remaining_balance = remaining_balance
-
-    def __str__(self):
-        return f"{self.amount} ({self.transaction_type})"
+    id: int
+    organization: int | None = None
+    account: Optional[AccountEntity] = None 
+    to_account: Optional[AccountEntity] = None 
+    category: Optional[dict] = None 
+    created_by: Optional[UserEntity] = None 
+    initiated_by: Optional[UserEntity] = None 
+    amount: float = 0 
+    remaining_balance: float = 0 
+    transaction_type: str = ''
+    occurred_at: Optional[datetime] = None
+    description: str = ''
+    created_at: Optional[datetime] = None
