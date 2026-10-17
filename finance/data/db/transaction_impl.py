@@ -38,6 +38,9 @@ class TransactionRepositoryImpl(TransactionRepository):
             if account:=search_params.get("account"):
                 transactions = transactions.filter(account=account)
 
+            if initiated_by:=search_params.get("initiated_by"):
+                transactions = transactions.filter(initiated_by=initiated_by)
+
             return [self.to_entity(transaction) for transaction in transactions]
         except Exception as e:
             print(f"Error occured in fetching transactions:{repr(e)}")
@@ -129,6 +132,7 @@ class TransactionRepositoryImpl(TransactionRepository):
             transaction_type=obj.transaction_type,    
             category=obj.category,      
             created_by = obj.created_by,  
+            initiated_by = obj.initiated_by,  
             amount = obj.amount,  
             occurred_at = obj.occurred_at,  
             description = obj.description,  
