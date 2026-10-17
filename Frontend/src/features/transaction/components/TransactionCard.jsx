@@ -15,13 +15,13 @@ export const TransactionCard = ({ transaction, onUpdate, onDelete }) => {
   const transaction_type = transaction.transaction_type;
 
   return (
-    <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+    <div className="flex min-w-0 items-start justify-between gap-3 rounded-lg bg-gray-50 p-3 transition-colors hover:bg-gray-100 sm:items-center sm:p-4">
       
       {/* Transaction Details */}
-      <div className="flex items-center space-x-4 max-w-[80%]">
+      <div className="flex min-w-0 flex-1 items-start gap-3 sm:items-center sm:gap-4">
 
         <div
-          className={`p-3 rounded-full ${
+          className={`shrink-0 rounded-full p-2.5 sm:p-3 ${
             transaction_type === "income"
               ? "bg-green-100"
               : transaction_type === "transfer"
@@ -38,9 +38,9 @@ export const TransactionCard = ({ transaction, onUpdate, onDelete }) => {
           )}
         </div>
 
-        <div>
-          <p className="font-medium text-gray-900 p-1">{transaction.description}</p>
-          <div className="flex items-center space-x-4 mt-1">
+        <div className="min-w-0">
+          <p className="break-words p-1 font-medium text-gray-900">{transaction.description}</p>
+          <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1">
             <span className="text-sm text-gray-600">{formatDate(transaction.occurred_at)}</span>
             {transaction.category && (
               <span className="px-2 py-0.5 bg-blue-100 text-blue-800 text-xs rounded-full">
@@ -63,8 +63,8 @@ export const TransactionCard = ({ transaction, onUpdate, onDelete }) => {
       </div>
 
       {/* Amount */}
-      <div className="flex items-center space-x-4">
-        <p className={`text-lg font-bold ${transaction_type === 'income' ? 'text-green-600' : 'text-red-600'}`}>
+      <div className="flex shrink-0 items-center gap-1 sm:gap-4">
+        <p className={`max-w-32 break-words text-right text-sm font-bold sm:max-w-none sm:text-lg ${transaction_type === 'income' ? 'text-green-600' : 'text-red-600'}`}>
           {transaction_type === 'income' ? '+' : '-'}{formatCurrency(Math.abs(transaction.amount))}
         </p>
 

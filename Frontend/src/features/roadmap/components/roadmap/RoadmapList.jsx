@@ -57,50 +57,52 @@ export const RoadmapList = ({
   return (
     <>
       <Card
-        title={`My Roadmaps (${pages?.pages?.at(-1)?.meta?.total_count || 0})`}
+        title="Roadmap"
         action={
-          <div className="flex flex-wrap gap-2 items-center">
-            <Button
-              size="sm"
-              variant="ghost"
-              onClick={() => setShowFilters(!showFilters)}
-              disabled={!!error}
-            >
-              <Filter className="h-4 w-4 mr-2" />
-              Filter
-            </Button>
-
-            {/* Filters */}
-            <FilterModal
-              show={showFilters}
-              onClose={() => setShowFilters(false)}
-              filters={filters}
-              setFilters={setFilters}
-            />
-
+          <>
             <SearchBar
-              placeholder="Search roadmaps..."
+              placeholder="Search..."
               value={filters.search || ''}
               onSubmit={(value) => setFilters({ ...filters, search: value || null })}
-              className="max-w-md h-10"
+              className="w-1/2 min-w-0 md:w-56 md:flex-1 md:max-w-md"
             />
+
             <Button
-              size="sm"
+              size="xs"
+              variant="ghost"
+              onClick={() => setShowFilters(!showFilters)}
+              title="Filter"
+              className="flex items-center px-2 py-1 text-xs sm:px-3 sm:py-2 sm:text-sm"
+            >
+              <Filter className="h-4 w-4" />
+              <span className="hidden sm:inline ml-1">Filter</span>
+            </Button>
+
+            <Button
+              size="xs"
               onClick={() => {
                 setEditingRoadmap(null);
                 setShowAddModal(true);
               }}
               disabled={!!error}
-              className='w-35 h-10 flex justify-center items-center'
+              className="flex items-center justify-center px-2 py-1 text-xs sm:px-3 sm:py-2 sm:text-sm"
+              title="Add Roadmap"
             >
-              <Plus className="h-4 w-4 mr-2" />
-              <span className="hidden sm:inline">New Roadmap</span>
-              <span className="sm:hidden">New</span>
+              <Plus className="h-4 w-4"/>
+              <span className="hidden sm:inline ml-1">New</span>
             </Button>
-          </div>
+          </>
         }
       >
         <div className="max-h-120 overflow-y-auto">
+
+          <FilterModal
+            show={showFilters}
+            onClose={() => setShowFilters(false)}
+            filters={filters}
+            setFilters={setFilters}
+          />
+          
           {isLoading ? (
             <div className="flex items-center justify-center h-full">
               <Spinner size="lg" />
@@ -114,7 +116,7 @@ export const RoadmapList = ({
               description="Create your first roadmap to start tracking your progress"
             />
           ) : (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-3 sm:gap-6 lg:grid-cols-2">
               {data.map((roadmap) => (
                 <RoadmapCard
                   key={roadmap.id}

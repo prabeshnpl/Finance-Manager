@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { dashboardService } from "../services/dashboardService";
 import { useState } from "react";
 
@@ -21,10 +21,18 @@ export function useDashboard() {
     retry: false,
   });
 
-  const incomeExpenseTrend = useQuery({
+  const incomeExpenseTrend = useInfiniteQuery({
     queryKey: ["finance", "income-expense-trend", dashboardFilters],
-    queryFn: () =>
-      dashboardService.getIncomeExpenseTrend(dashboardFilters),
+    queryFn: ({ pageParam }) =>
+      dashboardService.getIncomeExpenseTrend({
+        ...dashboardFilters,
+        page: pageParam,
+      }),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage) =>
+      lastPage?.pagination?.has_next
+        ? lastPage.pagination.page + 1
+        : undefined,
     retry: false,
   });
 
