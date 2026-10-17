@@ -10,6 +10,7 @@ class TransactionEntity:
         to_account: dict | None, # type: ignore
         category: dict | None, # type: ignore
         created_by: ['CustomUser'] = None, # type: ignore
+        initiated_by: ['CustomUser'] = None, # type: ignore
         amount: float = 0,
         remaining_balance: float | None = 0,
         transaction_type: str = "income",
@@ -23,6 +24,7 @@ class TransactionEntity:
         self.to_account = to_account
         self.category = category
         self.created_by = created_by
+        self.initiated_by = initiated_by
         self.amount = amount
         self.transaction_type = transaction_type
         self.occurred_at = occurred_at

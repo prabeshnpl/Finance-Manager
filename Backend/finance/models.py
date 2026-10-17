@@ -102,8 +102,16 @@ class Transaction(models.Model):
 
     created_by = models.ForeignKey(
         CustomUser,
-        related_name="transactions",
+        related_name="created_transactions",
         on_delete=models.SET_NULL,
+        null=True
+    )
+
+    initiated_by = models.ForeignKey(
+        CustomUser,
+        related_name="initiated_transactions",
+        on_delete=models.SET_NULL,
+        blank=True,
         null=True
     )
 
