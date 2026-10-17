@@ -1,24 +1,15 @@
-from typing import Optional
+from dataclasses import dataclass
 from datetime import datetime
+from typing import Optional
 
+@dataclass
 class AccountEntity:
-    def __init__(
-        self,
-        id: int,
-        organization: ['Organization'], # type: ignore
-        name: str,
-        account_type: str,
-        is_active: bool = True,
-        balance:float = 0,
-        created_at: Optional[datetime] = None,
-    ):
-        self.id = id
-        self.organization = organization
-        self.name = name
-        self.account_type = account_type
-        self.is_active = is_active
-        self.balance = balance
-        self.created_at = created_at
-
-    def __str__(self):
-        return self.name
+    id: int
+    organization: Optional[int] = None
+    balance:float = 0
+    is_active: bool = True
+    name: str = ''
+    account_type: str = ''
+    is_active: bool = False
+    created_at: Optional[datetime] = None 
+    

@@ -1,6 +1,8 @@
 from typing import List
 from rest_framework.response import Response
-from finance.domain.entity.transaction_entity import TransactionEntity
+from finance.domain.entity.category_entity import CategoryEntity
+from finance.domain.entity.account_entity import AccountEntity
+from finance.domain.entity.transaction_entity import TransactionEntity, UserEntity
 from finance.domain.repository.transaction_repo import TransactionRepository
 from finance.models import Transaction
 from django.db import transaction
@@ -10,8 +12,8 @@ class TransactionRepositoryImpl(TransactionRepository):
     def list_transactions(self, search_params: dict, organization:int, role:str) -> List[TransactionEntity] | Response:
         try:
             transactions = Transaction.objects.\
-                select_related("category", "account").\
-                filter(organization=organization).\
+                select_related("category", "account", "to_account", "created_by", "initiated_by").\
+                filter(organization_id=organization).\
                 order_by('-occurred_at', '-created_at')
 
             if transaction_type:=search_params.get("type"):
@@ -86,7 +88,7 @@ class TransactionRepositoryImpl(TransactionRepository):
     
     def update_transaction(self, id: int, data: dict, organization:int, role:str) -> TransactionEntity | Response:
         try:
-            transaction = Transaction.objects.filter(organization=organization, id=id).first()
+            transaction = Transaction.objects.filter(organization_id=organization, id=id).first()
             if not transaction:
                 return Response({'detail':'Invalid transaction'}, status=400)
 
@@ -110,14 +112,14 @@ class TransactionRepositoryImpl(TransactionRepository):
     
     def get_transaction_by_id(self, id: int, organization:int, role:str) -> TransactionEntity | Response:
         try:
-            transaction = Transaction.objects.filter(organization=organization, id=id).first()
+            transaction = Transaction.objects.filter(organization_id=organization, id=id).first()
             return self.to_entity(transaction) # type: ignore
         except Exception as e:
             print(f"Error occured while getting transaction:{repr(e)}")
             return Response({"detail":f"str{e}"}, status=500)
     
     def delete_transaction(self, id: int, organization:int, role:str) -> Response:
-        transaction = Transaction.objects.filter(organization=organization, id=id).first()
+        transaction = Transaction.objects.filter(organization_id=organization, id=id).first()
         if transaction:
             transaction.delete() 
             return Response({'detail':"Deleted successfully"})
@@ -126,16 +128,39 @@ class TransactionRepositoryImpl(TransactionRepository):
     def to_entity(self, obj:Transaction):
         return TransactionEntity(
             id=obj.id, # type: ignore
-            organization=obj.organization,
-            account=obj.account,
-            to_account=obj.to_account,
+            organization=obj.organization.id,
+            account=self.to_account_entity(obj.account),
+            to_account=self.to_account_entity(obj.to_account),
             transaction_type=obj.transaction_type,    
-            category=obj.category,      
-            created_by = obj.created_by,  
-            initiated_by = obj.initiated_by,  
+            category=self.to_category_entity(obj.category),      
+            created_by = self.to_user_entity(obj.created_by) if obj.created_by else None,
+            initiated_by = self.to_user_entity(obj.initiated_by) if obj.initiated_by else None,  
             amount = obj.amount,  
             occurred_at = obj.occurred_at,  
             description = obj.description,  
             created_at=obj.created_at,
             remaining_balance=obj.remaining_balance
+        )
+
+    def to_user_entity(self, obj:'CustomUser'): # type: ignore
+        return UserEntity(
+            id=obj.id,
+            first_name=obj.first_name,
+            last_name=obj.last_name
+        )
+
+    def to_account_entity(self, account):
+        if account is None:
+            return None
+        return AccountEntity(
+            id=account.id,
+            name=account.name
+        )
+
+    def to_category_entity(self, category):
+        if category is None:
+            return None
+        return CategoryEntity(
+            id=category.id,
+            name=category.name
         )

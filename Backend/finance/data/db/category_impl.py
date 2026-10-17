@@ -1,5 +1,6 @@
 from typing import List
 from rest_framework.response import Response
+from organization.domain.entity.organization_entity import OrganizationEntity
 from finance.domain.entity.category_entity import CategoryBreakdownEntity, CategoryEntity
 from finance.domain.repository.category_repo import CategoryRepository
 from finance.models import Category
@@ -76,7 +77,7 @@ class CategoryRepositoryImpl(CategoryRepository):
     def to_entity(self, obj:Category):
         return CategoryEntity(
             id=obj.id, # type: ignore
-            organization=obj.organization,
+            organization=obj.organization.id,
             name=obj.name,
             category_type=obj.category_type,    
             color=obj.color,
@@ -86,7 +87,7 @@ class CategoryRepositoryImpl(CategoryRepository):
     def to_breakdown_entity(self, obj:Category):
         return CategoryBreakdownEntity(
             id=obj.id, # type: ignore
-            organization=obj.organization,
+            organization=obj.organization.id,
             name=obj.name,
             category_type=obj.category_type,    
             color=obj.color,
