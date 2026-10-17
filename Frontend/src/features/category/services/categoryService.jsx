@@ -2,7 +2,7 @@ import { api } from "@/api/apiClient";
 import { ENDPOINTS } from "@/api/endpoints";
 
 export const categoryService = {
-  getCATEGORY: () =>
+  getCategories: () =>
     api.get(`${ENDPOINTS.CATEGORY}/`),
 
   createCategory: (data) =>
