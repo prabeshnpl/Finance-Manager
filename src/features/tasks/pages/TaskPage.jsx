@@ -7,7 +7,6 @@ import { Tabs, TabPanel } from '../../../shared/components/tabs/Tabs';
 import { List, LayoutGrid } from 'lucide-react';
 import { Button } from '../../../shared/components/Button';
 import { Plus, Filter} from 'lucide-react';
-import { Card } from '../../../shared/components/Card';
 import SearchBar from '../../../shared/components/Search/SearchBar';
 import { useTasks } from '../hooks/useTasks';
 import FilterModal from '../components/FilterModal';
@@ -34,7 +33,7 @@ export const TasksPage = () => {
   const tabs = [
     {
       id: 'list',
-      label: 'List View',
+      label: 'List',
       icon: List,
     },
     {
@@ -46,38 +45,48 @@ export const TasksPage = () => {
 
   return (
     <>
-      <Card>
-        {/* Tabs */}
-        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+      <div className='bg-white rounded-lg shadow-md px-4 pt-1 pb-4'>
+
+        {/* Tabs and Filters*/}
+        <div className="flex flex-row md:items-center md:justify-between border-b-2 pb-1 sticky top-0 bg-white">
+          
           <Tabs tabs={tabs} activeTab={activeTab} onChange={setActiveTab} />
-          <div className="grid w-full grid-cols-2 gap-2 md:flex md:w-auto md:flex-wrap md:items-center">
+
+          <div className="flex items-center justify-end sm:gap-2 flex-wrap md:w-auto">
+            
             <SearchBar
-              placeholder="Search tasks..."
+              placeholder="Search..."
               value={filters.search || ''}
               onSubmit={(value) => setFilters({ ...filters, search: value || null })}
-              className="col-span-2 h-10 w-full min-w-0 md:col-span-1 md:w-56"
+              className="w-1/2 min-w-0 md:w-56 md:flex-1 md:max-w-md"
             />
+            
             <Button
-              size="sm"
+              size="xs"
               variant="ghost"
               onClick={() => setShowFilters(!showFilters)}
-              className="w-full justify-center md:w-auto"
+              title="Filter"
+              className="flex items-center px-2 py-1 text-xs sm:px-3 sm:py-2 sm:text-sm"
             >
-              <Filter className="h-4 w-4 mr-2" />
-              Filter
+              <Filter className="h-4 w-4" />
+              <span className="hidden sm:inline ml-1">Filter</span>
             </Button>
+
             <Button 
               size="sm"
               onClick={() => {
                 setEditingTask(null);
                 setShowAddModal(true);
               }}
-              className="h-10 w-full justify-center md:w-auto"
+              className="flex items-center px-2 py-1 text-xs sm:px-3 sm:py-2 sm:text-sm"
+              title="Add Task"
             >
-              <Plus className="h-4 w-4 mr-2" />
-              <span>Add Task</span>
+              <Plus className="h-4 w-4" />
+              <span className="hidden sm:inline ml-1">New</span>
             </Button>
+
           </div>
+
           {/* Filters */}
           <FilterModal
             show={showFilters}
@@ -85,6 +94,7 @@ export const TasksPage = () => {
             filters={filters}
             setFilters={setFilters}
           />
+
         </div>
 
         {/* Content */}
@@ -141,7 +151,7 @@ export const TasksPage = () => {
             }}
           />
         )}
-      </Card>
+      </div>
     </>
   );
 };

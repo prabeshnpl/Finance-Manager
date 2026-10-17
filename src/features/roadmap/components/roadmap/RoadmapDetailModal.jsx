@@ -125,7 +125,7 @@ export const RoadmapDetailModal = ({
           <div className="flex items-center justify-between gap-4">
             <Tabs tabs={tabs} activeTab={activeTab} onChange={setActiveTab} />
             {showGlobalAdd && (
-              <Button size="sm" onClick={handleAddClick}>
+              <Button size="sm" onClick={handleAddClick} className='flex items-center'>
                 <Plus className="h-4 w-4 mr-2" />
                 {addButtonLabel}
               </Button>

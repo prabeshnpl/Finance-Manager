@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { TaskCard } from './TaskCard';
-import { Spinner } from '../../../shared/components/Spinner';
-import ErrorState from '../../../shared/components/Error/ErrorState';
+import { Spinner } from '@/shared/components/Spinner';
+import { ErrorState } from '@/shared/components/Error/ErrorState';
 
 const columns = [
   { id: 'pending', title: 'To Do', color: 'gray' },
@@ -28,16 +28,18 @@ const KanbanColumn = ({ column, useInfiniteTasks, onTaskClick, onTaskEdit, onUpd
 
   const data = pages?.pages ? pages.pages.flat() : [];
   const sentinelRef = useRef(null);
+  const listRef = useRef(null);
 
   useEffect(() => {
-    if (!fetchNextPage || !hasNextPage) return;
+    const root = listRef.current;
+    if (!root || !fetchNextPage || !hasNextPage) return;
 
     const observer = new IntersectionObserver((entries) => {
       const entry = entries[0];
       if (entry.isIntersecting && hasNextPage && !isFetchingNextPage) {
         fetchNextPage();
       }
-    }, { threshold: 1 });
+    }, { root, threshold: 1 });
 
     const el = sentinelRef.current;
     if (el) observer.observe(el);
@@ -46,8 +48,8 @@ const KanbanColumn = ({ column, useInfiniteTasks, onTaskClick, onTaskEdit, onUpd
   }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
   return (
-    <div className="flex flex-col">
-      <div className={`bg-white rounded-lg shadow-md p-4 border-t-4 ${colorClasses[column.color]} mb-4`}>
+    <div className="flex h-full min-h-0 w-[78vw] shrink-0 flex-col md:w-auto md:flex-1 md:shrink">
+      <div className={`shrink-0 bg-white rounded-lg shadow-md p-4 border-t-4 ${colorClasses[column.color]} mb-3`}>
         <h3 className="font-semibold text-gray-900 flex items-center justify-between">
           <span>{column.title}</span>
           <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
@@ -55,11 +57,14 @@ const KanbanColumn = ({ column, useInfiniteTasks, onTaskClick, onTaskEdit, onUpd
           </span>
         </h3>
       </div>
-      <div className="space-y-3 flex-1">
+      <div
+        ref={listRef}
+        className="min-h-0 flex-1 space-y-3 overflow-y-auto overscroll-y-contain pr-1 touch-pan-x touch-pan-y"
+      >
         {isLoading ? (
-          <Spinner />
+          <div className="flex justify-center py-4"><Spinner /></div>
         ) : error ? (
-          <div className="p-6">
+          <div className="p-2">
             <ErrorState message="Failed to load tasks." onRetry={refetch} />
           </div>
         ) : data?.length === 0 ? (
@@ -78,8 +83,12 @@ const KanbanColumn = ({ column, useInfiniteTasks, onTaskClick, onTaskEdit, onUpd
             />
           ))
         )}
+        {hasNextPage && (
+          <div ref={sentinelRef} className="flex h-8 shrink-0 items-center justify-center">
+            {isFetchingNextPage && <Spinner />}
+          </div>
+        )}
       </div>
-      <div ref={sentinelRef} className="h-2"></div>
     </div>
   );
 };
@@ -92,18 +101,20 @@ export const TaskKanban = ({
   deleteTask: onDelete,
 }) => {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      {columns.map((column) => (
-        <KanbanColumn
-          key={column.id}
-          column={column}
-          useInfiniteTasks={useInfiniteTasks}
-          onTaskClick={onTaskClick}
-          onTaskEdit={onTaskEdit}
-          onUpdate={onUpdate}
-          onDelete={onDelete}
-        />
-      ))}
+    <div className="h-[min(70dvh,42rem)] min-h-80 min-w-0">
+      <div className="flex h-full gap-4 overflow-x-auto overflow-y-hidden overscroll-x-contain pb-2 touch-pan-x touch-pan-y md:overflow-x-hidden md:overscroll-x-auto">
+        {columns.map((column) => (
+          <KanbanColumn
+            key={column.id}
+            column={column}
+            useInfiniteTasks={useInfiniteTasks}
+            onTaskClick={onTaskClick}
+            onTaskEdit={onTaskEdit}
+            onUpdate={onUpdate}
+            onDelete={onDelete}
+          />
+        ))}
+      </div>
     </div>
   );
 };
