@@ -22,6 +22,21 @@ class ReportsImpl:
             period = search_params.get('period', 'monthly')  # daily, monthly, yearly
             category_id = search_params.get('category')
             account_id = search_params.get('account')
+            try:
+                page = int(search_params.get('page', 1))
+            except (TypeError, ValueError):
+                return Response({'detail': 'Page must be a positive integer.'}, status=400)
+
+            if page < 1:
+                return Response({'detail': 'Page must be a positive integer.'}, status=400)
+
+            max_page = 4 if period in ('daily', 'monthly') else 1
+            if page > max_page:
+                return Response(
+                    {'detail': f'Page must not exceed {max_page} for the selected period.'},
+                    status=400
+                )
+
             # Build queryset with filters
             queryset = Transaction.objects.\
                 filter(organization=organization).\
@@ -32,13 +47,13 @@ class ReportsImpl:
             if account_id:
                 queryset = queryset.filter(account_id=account_id)
             
-            # Determine date range and fixed buckets
+            # Each daily page covers one week; each monthly page covers one year.
             now = timezone.localtime(timezone.now())
             today = now.date()
             bucket_definitions = []
 
             if period == 'daily':
-                end_date = today
+                end_date = today - timedelta(days=(page - 1) * 7)
                 start_date = end_date - timedelta(days=6)
                 period_label = "daily"
                 bucket_definitions = [start_date + timedelta(days=i) for i in range(7)]
@@ -49,21 +64,30 @@ class ReportsImpl:
                 end_date = date(end_year, 12, 31)
                 period_label = "yearly"
                 bucket_definitions = [start_year, end_year]
-            else:
-                start_date = date(today.year - 1, today.month, 1)
-                end_date = date(today.year, today.month, today.day)
-
+            elif period == 'monthly':
                 period_label = "monthly"
-                year = start_date.year
-                month = start_date.month
+                end_month_index = today.year * 12 + today.month - 1 - (page - 1) * 12
+                end_year, end_month_zero_based = divmod(end_month_index, 12)
+                end_month = end_month_zero_based + 1
+                start_month_index = end_month_index - 11
+                start_year, start_month_zero_based = divmod(start_month_index, 12)
+                start_month = start_month_zero_based + 1
+                start_date = date(start_year, start_month, 1)
+                end_of_page_month = date(
+                    end_year,
+                    end_month,
+                    calendar.monthrange(end_year, end_month)[1]
+                )
+                end_date = min(end_of_page_month, today)
 
-                for _ in range(12):
-                    bucket_definitions.append(date(year, month, 1))
-                    # Move to next month
-                    month += 1
-                    if month > 12:
-                        month = 1
-                        year += 1
+                for month_offset in range(12):
+                    bucket_month_index = start_month_index + month_offset
+                    bucket_year, bucket_month_zero_based = divmod(bucket_month_index, 12)
+                    bucket_definitions.append(
+                        date(bucket_year, bucket_month_zero_based + 1, 1)
+                    )
+            else:
+                return Response({'detail': 'Unsupported period type.'}, status=400)
 
             queryset = queryset.filter(
                 occurred_at__date__gte=start_date,
@@ -136,6 +160,11 @@ class ReportsImpl:
             return Response({
                 'period': period_label,
                 'applied_filters': applied_filters,
+                'pagination': {
+                    'page': page,
+                    'max_page': max_page,
+                    'has_next': page < max_page,
+                },
                 'series': series,
                 'totals': {
                     'income': int(total_income),
