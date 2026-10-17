@@ -30,9 +30,6 @@ export const AddTransactionModal = ({
   const {data:categoriesData, isLoading:categoriesLoading, error:categoriesError} = categories;
   const {data:accountsData, isLoading:accountsLoading, error:accountsError} = accounts;
 
-  // if (error){
-    console.log(categories)
-  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
