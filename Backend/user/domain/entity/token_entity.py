@@ -1,10 +1,9 @@
 from typing import Optional
 from user.domain.entity.user_entity import CustomUserEntity
+from dataclasses import dataclass
 
+@dataclass
 class TokenEntity:
-    def __init__(self,
-        access : str,
-        user : Optional[CustomUserEntity],
-    ):
-        self.access = access
-        self.user = user
+    access : str
+    user : Optional[CustomUserEntity]
+    
