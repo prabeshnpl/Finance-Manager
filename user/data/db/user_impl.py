@@ -11,6 +11,10 @@ from rest_framework_simplejwt.tokens import RefreshToken
 class CustomUserRepoImpl(CustomUserRepository):
     def create_user(self, data: dict) -> Optional[TokenEntity] | Optional[Response]:
         try:
+            password = data.get("password")
+            confirmPassword = data.get("confirmPassword")
+            if not password or not confirmPassword or password != confirmPassword:
+                return Response({'detail':'Password field is empty or mismatched.'}, status=400)
             with transaction.atomic():
                 user_data = {
                     "first_name":data.get("first_name"),
@@ -19,7 +23,7 @@ class CustomUserRepoImpl(CustomUserRepository):
                 }
 
                 user = CustomUser(**user_data)
-                user.set_password(data.get("password"))
+                user.set_password(password)
                 user.save()
 
                 organization = Organization.objects.create(

@@ -31,6 +31,8 @@ class CreateUserView(BaseTenantAPIView):
 
         usecase = CreateCustomUserUseCase(repo=self.repository())
         data = serializer.validated_data
+        data['password'] = request.data.get("password")
+        data['confirmPassword'] = request.data.get("confirmPassword")
         response = usecase.execute(data=data) 
         if isinstance(response, Response):
             return response 
