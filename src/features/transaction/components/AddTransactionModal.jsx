@@ -211,7 +211,6 @@ export const AddTransactionModal = ({
               <div>
                 <label className="block font-medium text-gray-900 mb-2">Initiated By</label>
                 <select
-                  required
                   onChange={(e) => setFormData({ ...formData, initiated_by: e.target.value })}
                   className="w-full px-4 py-2 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 invalid:text-gray-400"
                   disabled={loading}
@@ -227,7 +226,7 @@ export const AddTransactionModal = ({
                     <option>Error loading accounts</option>
                   ) : (
                     members?.data.map((member) => (
-                      <option key={member.id} value={member.id}>
+                      <option key={member.id} value={member.user.id}>
                         {member?.user?.first_name} {member?.user?.last_name}
                       </option>
                     ))
