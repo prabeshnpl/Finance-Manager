@@ -54,16 +54,15 @@ export const TransactionCard = ({ transaction, onUpdate, onDelete }) => {
 
       </div>
 
-      {/* <div className='flex flex-col'>
-          <p>Created by</p>
-          <p>{transaction.created_by.first_name} {transaction.created_by.last_name}</p>
-      </div> */}
-
       {/* Transaction Amount */}
       <div className="flex justify-end min-w-0 flex-row flex-wrap items-start gap-1.5 sm:gap-3">
 
-          <p className={`flex items-center max-w-28 wrap-break-word pt-1 text-right text-xs font-bold leading-tight sm:max-w-none sm:pt-0 sm:text-base ${transaction_type === 'income' ? 'text-green-600' : transaction_type === 'transfer' ? 'text-blue-600' : 'text-red-600'}`}>
-            {transaction_type === 'income' ? <ChevronUp /> : <ChevronDown />}{formatCurrency(Math.abs(transaction.amount))}
+          <p className={`flex items-center gap-2 max-w-28 wrap-break-word pt-1 text-right text-xs font-bold leading-tight sm:max-w-none sm:pt-0 sm:text-base ${transaction_type === 'income' ? 'text-green-600' : transaction_type === 'transfer' ? 'text-blue-600' : 'text-red-600'}`}>
+            {transaction_type === 'income' ? 
+              <ChevronUp /> : transaction_type === 'expense' ? 
+              <ChevronDown/> : <ArrowLeftRight className="h-4 w-4 text-blue-600"/>
+            }
+            {formatCurrency(Math.abs(transaction.amount))}
           </p>
 
       </div>
