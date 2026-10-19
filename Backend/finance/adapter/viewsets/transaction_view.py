@@ -1,5 +1,5 @@
 from rest_framework.permissions import IsAuthenticated
-from finance.adapter.serializers.transaction_serializer import TransactionSerializer
+from finance.adapter.serializers.transaction_serializer import TransactionDTOSerializer, TransactionSerializer
 from finance.data.db.transaction_impl import TransactionRepositoryImpl
 from finance.domain.usecase.transaction_usecase import CreateTransactionUseCase, DeleteTransactionUseCase, GetTransactionByIdUseCase, ListTransactionsUseCase, UpdateTransactionUseCase
 from utils.pagniator import CustomPageNumberPagination
@@ -11,7 +11,7 @@ class TransactionViewset(BaseTenantModelViewSet):
     parser_classes = [JSONParser, MultiPartParser, FormParser]
     repository = TransactionRepositoryImpl
     permission_classes = [IsAuthenticated]
-    serializer_class = TransactionSerializer
+    serializer_class = TransactionDTOSerializer
     pagination_class = CustomPageNumberPagination
 
     require_organization = True
@@ -67,7 +67,7 @@ class TransactionViewset(BaseTenantModelViewSet):
         data['organization'] = request.organization.id
         print(data, flush=True)
         print("after validation:\n.............................\n", flush=True)
-        serializer = self.get_serializer(data=data)
+        serializer = TransactionSerializer(data=data)
         serializer.is_valid(raise_exception=True)
         print(serializer.validated_data, flush=True)
         entity = usecase.execute(data=serializer.validated_data, organization=request.organization.id,role=request.role)

@@ -5,7 +5,7 @@ from typing import Optional
 @dataclass
 class AccountEntity:
     id: int
-    organization: Optional[int] = None
+    organization_id: Optional[int] = None
     balance:float = 0
     is_active: bool = True
     name: str = ''

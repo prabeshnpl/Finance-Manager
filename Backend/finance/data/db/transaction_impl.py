@@ -75,6 +75,7 @@ class TransactionRepositoryImpl(TransactionRepository):
                     _transaction.account.balance -= _transaction.amount
                     _transaction.to_account.balance += _transaction.amount
                     _transaction.account.save()                    
+                    _transaction.to_account.save()                    
 
                 remaining_balance = _transaction.account.balance
                 _transaction.remaining_balance = remaining_balance
@@ -128,7 +129,7 @@ class TransactionRepositoryImpl(TransactionRepository):
     def to_entity(self, obj:Transaction):
         return TransactionEntity(
             id=obj.id, # type: ignore
-            organization=obj.organization.id,
+            organization_id=obj.organization.id,
             account=self.to_account_entity(obj.account),
             to_account=self.to_account_entity(obj.to_account),
             transaction_type=obj.transaction_type,    

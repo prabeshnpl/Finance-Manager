@@ -1,47 +1,32 @@
 from rest_framework import serializers
+from finance.models import Transaction
 
-# class TransactionSerializer(serializers.ModelSerializer):
+class TransactionSerializer(serializers.ModelSerializer):
     
-#     class Meta:
-#         model = Transaction
-#         fields = "__all__"
-    
-#     def to_representation(self, instance):
-#         rep = super().to_representation(instance)
-#         rep['category'] = {
-#             'id':instance.category.id,
-#             'name':instance.category.name
-#         } if instance.category else {}
-#         rep['account'] = {
-#             'id':instance.account.id,
-#             'name':instance.account.name
-#         } if instance.account else {}
-#         rep['to_account'] = {
-#             'id':instance.to_account.id,
-#             'name':instance.to_account.name
-#         } if instance.to_account else {}
-        
-#         return rep
+    class Meta:
+        model = Transaction
+        fields = "__all__"
 
 class UserSerializer(serializers.Serializer):
-    id = serializers.IntegerField()
-    first_name = serializers.CharField()
-    last_name = serializers.CharField()
+    id = serializers.IntegerField(allow_null=True, required=False)
+    first_name = serializers.CharField(allow_null=True, required=False)
+    last_name = serializers.CharField(allow_null=True, required=False)
 
 class AccountCategorySerializer(serializers.Serializer):
-    id = serializers.IntegerField()
-    name = serializers.CharField()
+    id = serializers.IntegerField(allow_null=True, required=False)
+    name = serializers.CharField(allow_null=True, required=False)
 
-class TransactionSerializer(serializers.Serializer):
-    id = serializers.IntegerField()
-    amount = serializers.FloatField()
-    transaction_type = serializers.CharField()
+class TransactionDTOSerializer(serializers.Serializer):
+    id = serializers.IntegerField(allow_null=True, required=False)
+    amount = serializers.FloatField(allow_null=True, required=False)
+    transaction_type = serializers.CharField(allow_null=True, required=False)
     created_by = UserSerializer(allow_null=True)
     initiated_by = UserSerializer(allow_null=True)
-    account = AccountCategorySerializer()
+    account = AccountCategorySerializer(allow_null=True, required=False)
     to_account = AccountCategorySerializer(allow_null=True)
     category = AccountCategorySerializer(allow_null=True)
     remaining_balance = serializers.FloatField(required=False, allow_null=True)
-    occurred_at = serializers.DateTimeField()
+    occurred_at = serializers.DateTimeField(allow_null=True, required=False)
     description = serializers.CharField(required=False, allow_blank=True)
     created_at = serializers.DateTimeField(read_only=True)
+

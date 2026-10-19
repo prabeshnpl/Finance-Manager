@@ -72,12 +72,11 @@ class CategoryRepositoryImpl(CategoryRepository):
         except Exception as e:
             print(f"Error occured in fetching categories:{repr(e)}")
             return Response({'detail':f"{str(e)}"}, status=500)
-    
-    
+       
     def to_entity(self, obj:Category):
         return CategoryEntity(
             id=obj.id, # type: ignore
-            organization=obj.organization.id,
+            organization_id=obj.organization.id,
             name=obj.name,
             category_type=obj.category_type,    
             color=obj.color,
@@ -87,7 +86,7 @@ class CategoryRepositoryImpl(CategoryRepository):
     def to_breakdown_entity(self, obj:Category):
         return CategoryBreakdownEntity(
             id=obj.id, # type: ignore
-            organization=obj.organization.id,
+            organization_id=obj.organization.id,
             name=obj.name,
             category_type=obj.category_type,    
             color=obj.color,
