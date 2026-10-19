@@ -6,7 +6,7 @@ from organization.domain.entity.organization_entity import OrganizationEntity
 @dataclass
 class CategoryEntity:
     id: int
-    organization: Optional[int] = None
+    organization_id: Optional[int] = None
     name: str = ""
     category_type: str = ""
     color: str = ""
@@ -15,7 +15,7 @@ class CategoryEntity:
 @dataclass
 class CategoryBreakdownEntity(CategoryEntity):
     id: int    
-    organization: Optional[int] = None
+    organization_id: Optional[int] = None
     name: str = ""
     category_type: str = ""
     color: str = ""

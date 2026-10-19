@@ -70,12 +70,12 @@ class CategoryViewset(BaseTenantModelViewSet):
     def create(self, request, *args, **kwargs):
         usecase = CreateCategoryUseCase(repo=self.repository())
         data = request.data
-        data['organization'] = request.organization.id
+        data['organization_id'] = request.organization.id
 
         serializer = self.get_serializer(data=data)
         serializer.is_valid(raise_exception=True)
 
-        entity = usecase.execute(data=serializer.validated_data, organization=request.organization,role=request.role)
+        entity = usecase.execute(data=serializer.validated_data, organization=data['organization_id'],role=request.role)
 
         if isinstance(entity, Response):
             return entity

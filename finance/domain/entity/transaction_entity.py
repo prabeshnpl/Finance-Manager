@@ -12,7 +12,7 @@ class UserEntity:
 @dataclass
 class TransactionEntity:
     id: int
-    organization: int | None = None
+    organization_id: int | None = None
     account: Optional[AccountEntity] = None 
     to_account: Optional[AccountEntity] = None 
     category: Optional[dict] = None 

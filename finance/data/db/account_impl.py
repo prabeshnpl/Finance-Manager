@@ -65,7 +65,7 @@ class AccountRepositoryImpl(AccountRepository):
     def to_entity(self, obj:Account):
         return AccountEntity(
             id=obj.id, # type: ignore
-            organization=obj.organization.id,
+            organization_id=obj.organization.id,
             name=obj.name,
             account_type=obj.account_type,    
             is_active=obj.is_active,  
