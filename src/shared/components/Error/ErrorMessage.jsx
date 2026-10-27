@@ -24,15 +24,12 @@ export const ErrorMessage = () => {
   if (!error) return null;
 
   return (
-    <div
-      className={`fixed bottom-8 right-8 p-4 
-                  shadow transition-opacity 
-                  duration-500 ease-in-out flex justify-center items-center
-                  mb-4 bg-red-100 border w-1/6 z-70
-                  border-red-400 text-red-700 rounded-lg
-                  opacity-100`}
-    >
-      
+    <div className="
+      fixed bottom-8 right-8 p-4 shadow transition-opacity 
+      duration-500 ease-in-out flex justify-center items-center
+      mb-4 bg-red-100 border sm:w-1/6 w-fit z-70 border-red-400 
+      text-red-700 rounded-lg opacity-100 text-sm sm:text-md"
+    >      
       <p>{error.message}</p>
     </div>
   );

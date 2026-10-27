@@ -69,24 +69,22 @@ export const AddTaskModal = ({ onClose, onCreate, onUpdate, task }) => {
   };
 
   return (
-    <div 
-      className="fixed inset-0 bg-black/50 flex items-center justify-center z-60 p-4" 
-      onClick={onClose}
-    >
-      <div 
-        className="bg-white rounded-lg shadow-xl max-w-lg w-full max-h-[90vh] overflow-y-auto"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="flex items-center justify-between p-6 border-b border-gray-200 sticky top-0 bg-white">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-60 p-4">
+
+      <div className="bg-white rounded-lg shadow-xl max-w-lg w-full max-h-[90vh]">
+        
+        <div className="flex items-center justify-between px-6 py-3 sm:py-6 border-b border-gray-200 bg-white">
+          
           <h2 className="text-xl font-bold text-gray-900">
             {isEditing ? 'Edit Task' : 'Add New Task'}
           </h2>
           <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-lg">
             <X className="h-5 w-5 text-gray-600" />
           </button>
+
         </div>
 
-        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+        <form onSubmit={handleSubmit} className="p-6 space-y-4 overflow-y-auto">
           {error && (
             <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
               {error}
