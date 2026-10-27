@@ -4,7 +4,7 @@ import FormInput from '../../../shared/components/FormInput';
 import { useAuthStore } from '../../../stores/authStore';
 import { authService } from '../services/authService';
 import LoadingButton from '../../../shared/components/LoadingButton';
-import ErrorMessage from "../../../shared/components/Error/ErrorMessage"
+import { ErrorMessage } from "../../../shared/components/Error/ErrorMessage"
 
 export const LoginPage = () => {
     const [formData, setFormData] = useState({
@@ -141,6 +141,7 @@ export const LoginPage = () => {
                     </p>
                 </div>
             </div>
+            
             <ErrorMessage />
         </div>
     );

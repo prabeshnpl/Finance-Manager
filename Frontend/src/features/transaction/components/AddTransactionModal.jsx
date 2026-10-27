@@ -56,21 +56,24 @@ export const AddTransactionModal = ({
 
   return (
     <>
-      <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-60">
+      <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
 
         {/* Add Transaction Modal */}
-        <div className="bg-white rounded-lg shadow-xl max-w-3xl w-full max-h-[90vh]">
+        <div className="bg-white rounded-lg shadow-xl max-w-3xl pb-5">
         
           {/* Add Transaction Header */}
-          <div className="flex items-center justify-between py-5 px-8 border-b border-gray-200">
-            <h2 className="text-xl font-bold text-gray-900">Add Transaction</h2>
+          <div className="flex items-center justify-between py-2 px-5 sm:py-5 sm:px-8 border-b border-gray-200">
+            <h2 className="text-xl font-bold text-gray-900">Create Transaction</h2>
             <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-lg">
               <X className="h-5 w-5 text-gray-600" />
             </button>
           </div>
 
           {/* Transaction Form */}
-          <form onSubmit={handleSubmit} className="py-6 px-8 space-y-4 overflow-y-auto max-h-[calc(90vh-64px)]">
+          <form 
+            onSubmit={handleSubmit} 
+            className="px-5 pt-2 sm:pt-4 sm:px-8 space-y-4 overflow-y-auto max-h-[calc(90vh-64px)]"
+          >
             {error && (
               <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
                 {error}
@@ -216,12 +219,10 @@ export const AddTransactionModal = ({
                   disabled={loading}
                 >
                   <option value="" selected disabled>Select Member</option>
-                  {members?.isLoading ? (
-                    <option>
-                      <div className="flex items-center justify-center py-12">
+                  {members?.isLoading ? (                    
+                      <option className="flex items-center justify-center py-12">
                         <Spinner size="lg" />
-                      </div>
-                    </option>
+                      </option>                    
                   ) : members?.error ? (
                     <option>Error loading accounts</option>
                   ) : (
@@ -279,24 +280,31 @@ export const AddTransactionModal = ({
                 placeholder="Enter description"
                 rows="3"
                 required
-                className="w-full px-4 py-2 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 invalid:text-gray-400"
+                className="
+                  w-full px-4 py-2 border border-gray-700 
+                  rounded-lg focus:outline-none focus:ring-2
+                  focus:ring-blue-500 invalid:text-gray-400"
                 disabled={loading}
               />
             </div>
 
             {/* Cancel and Submit Buttons */}
-            <div className="flex space-x-3 pt-4">
+            <div className="flex space-x-3">
               <Button
                 type="button"
                 variant="secondary"
                 onClick={onClose}
                 disabled={loading}
-                className="flex-1"
+                className="flex-1 text-sm"
               >
                 Cancel
               </Button>
-              <Button type="submit" disabled={loading} className="flex-1">
-                {loading ? 'Adding...' : 'Add Transaction'}
+              <Button 
+                type="submit" 
+                disabled={loading} 
+                className="flex-1 text-sm"
+              >
+                {loading ? 'Adding...' : 'Create'}
               </Button>
             </div>
           </form>
