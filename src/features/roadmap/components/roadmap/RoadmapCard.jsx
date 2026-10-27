@@ -31,13 +31,15 @@ export const RoadmapCard = ({ roadmap, onDelete, onClick, onEdit }) => {
 
   return (
     <div
-      className="min-w-0 cursor-pointer rounded-lg border-2 bg-white p-4 shadow-md transition-shadow hover:shadow-lg sm:p-6"
+      className="min-w-0 cursor-pointer rounded-lg 
+                 border-2 bg-white p-4 shadow-md 
+                 transition-shadow hover:shadow-lg sm:p-6"
       onClick={onClick}
     >
       <div className="flex items-start justify-between mb-4">
         <div className="min-w-0 flex-1">
           <div className="mb-2 flex min-w-0 items-start gap-2">
-            <h3 className="break-words text-lg font-bold text-gray-900">{roadmap.title}</h3>
+            <h3 className="wrap-break-word sm:text-lg font-bold text-gray-900">{roadmap.title}</h3>
             {roadmap.is_delayed && (
               <AlertCircle className="h-4 w-4 text-red-500" />
             )}
@@ -107,7 +109,7 @@ export const RoadmapCard = ({ roadmap, onDelete, onClick, onEdit }) => {
       <div className="mb-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
         <div className="flex min-w-0 items-start gap-2 text-sm text-gray-600">
           <Calendar className="h-4 w-4" />
-          <span className="break-words">{formatDate(roadmap.start_date, "No start date")} - {formatDate(roadmap.end_date, "No end date")}</span>
+          <span className="wrap-break-word">{formatDate(roadmap.start_date, "No start date")} - {formatDate(roadmap.end_date, "No end date")}</span>
         </div>
         <div className="flex min-w-0 items-center gap-2 text-sm text-gray-600">
           <Clock className="h-4 w-4" />
