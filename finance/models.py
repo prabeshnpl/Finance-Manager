@@ -17,7 +17,7 @@ class Account(models.Model):
 
     name = models.CharField(max_length=128)
     
-    balance = models.FloatField()
+    balance = models.DecimalField(decimal_places=2, default=0.00, max_digits=15)
 
     account_type = models.CharField(
         max_length=32,
@@ -115,9 +115,9 @@ class Transaction(models.Model):
         null=True
     )
 
-    amount = models.FloatField()
+    amount = models.DecimalField(decimal_places=2, default=0.00, max_digits=15)
 
-    remaining_balance = models.FloatField(blank=True, null=True)
+    remaining_balance = models.DecimalField(decimal_places=2, default=0.00, max_digits=15)
 
     transaction_type = models.CharField(
         max_length=16,
