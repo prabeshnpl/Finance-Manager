@@ -1,5 +1,5 @@
 ### Push your code from 'main' branch to 'branch-backend' for production
-- `git subtree push --prefix=BackEnd origin branch-backend`
+- `git subtree push --prefix=Backend origin branch-backend`
 
 ## Deploy to MS Azure
 - Create VM resource 
@@ -141,15 +141,16 @@ git checkout v1.0.0
 ```
 
 ## Backup Postgres-db
-- Run it strictly on `git bash` or `cmd` not in `powershell`
-```
-docker exec -t postgres-db pg_dumpall -U admin > backup_all.sql
-```
+
+### Run it strictly on `git bash` or `cmd` not in `powershell`
+- Using plain SQL: `docker exec -t postgres-db pg_dump -U admin -d activity_tracker > backup.sql`
+- Using custom dump file:: `docker exec -t postgres-db pg_dump -U admin -d activity_tracker -F c > backup.dump`
 
 ## Restore db
-```
-docker exec -i postgres-db psql -U admin -d postgres < backup_all.sql
-```
+- Using plain SQL:  `docker exec -i postgres-db psql -U admin -d activity_tracker < backup.sql`
+- Using custom dump file:  
+    1. `docker cp backup.dump postgres-db:/tmp/backup.dump`
+    2. `docker exec -it postgres-db pg_restore -U admin -d activity_tracker --clean --if-exists /tmp/backup.dump`
 
 ## If backing up to different db
 ```

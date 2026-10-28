@@ -1,8 +1,0 @@
-services:
-  api:
-    build:
-      target: development
-    container_name: 'api-dev'
-    restart: always
-    volumes:
-      - .:/app
