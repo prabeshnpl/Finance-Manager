@@ -2,15 +2,15 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "http://98.70.53.78:8000"
+      "destination": "http://98.70.53.78:8000/api/$1"
     },
     {
       "source": "/media/(.*)",
-      "destination": "http://98.70.53.78:8000"
+      "destination": "http://98.70.53.78:8000/media/$1"
     },
     {
       "source": "/(.*)",
-      "destination": "/"
+      "destination": "/index.html"
     }
   ]
 }
