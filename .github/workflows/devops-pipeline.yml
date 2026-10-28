@@ -1,25 +1,27 @@
 # 1. Name of your pipeline
-name: App CI/CD Pipeline
+name: Backend CI/CD Pipeline
 
 # 2. The Trigger Event: Run only when code is pushed to the main branch
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "branch-backend" ]
 
 jobs:
   # JOB 1: Continuous Integration (Testing)
   run-tests:
-    runs-on: ubuntu-latest # Tells GitHub to give us a fresh Ubuntu machine
+    runs-on: ubuntu-24.04 # Same as MS Azure's VM's OS
     steps:
       - name: Checkout repository code
-        uses: actions/checkout@v6 # An official action that clones your code onto the runner
+        uses: actions/checkout@v6 
+        # 'uses' is pre-defined programming function
+        # actions/checkout@v6 is an official action that clones your code onto the runner
 
       - name: Set up Python environment
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
           cache: 'pip'
-          # 'uses' is like calling a programming function, 'with' is how you pass arguments/parameters into that function.
+          # 'with' is how you pass arguments/parameters into 'uses' function.
 
       - name: Install App Dependencies
         run: pip install -r Backend/activityTracker/requirements.txt 
