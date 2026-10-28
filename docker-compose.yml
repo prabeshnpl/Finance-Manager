@@ -1,8 +1,11 @@
 services:
   api:
+    container_name: 'api-dev'
+    restart: always
     build:
       context: .
       dockerfile: ./Dockerfile
+      target: development     
     ports:
       - 8000:8000
     command: ["sh", "/app/wsgi-entrypoint.sh"]
@@ -15,6 +18,7 @@ services:
         required: true
     volumes:
       - ./staticfiles:/vol/web/static
+      - .:/app
     networks:
       - my-network
     env_file:

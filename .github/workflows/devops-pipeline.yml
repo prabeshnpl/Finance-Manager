@@ -24,16 +24,16 @@ jobs:
           # 'with' is how you pass arguments/parameters into 'uses' function.
 
       - name: Install App Dependencies
-        run: pip install -r Backend/activityTracker/requirements.txt 
+        run: pip install -r requirements.txt 
         # 'run' command directly runs command inside terminal, 
         # whereas 'uses' uses predefined set of command called actions
         # (foreg: logging into docker can take very long boilerplate commands)
 
       - name: Run Test Suite
-        run: python Backend/activityTracker/manage.py test
+        run: python manage.py test
         env:
           ENVIRONMENT: testing
-          PYTHONPATH: Backend/activityTracker
+          PYTHONPATH: .
           FIREBASE_SERVICE_ACCOUNT_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
 
   # JOB 2: Continuous Deployment (Build & Ship)
@@ -70,7 +70,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: ./Backend/activityTracker/Dockerfile
+          file: ./Dockerfile
           target: production
           push: true
           tags: |
