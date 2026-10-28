@@ -1,0 +1,16 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "http://98.70.53.78:8000"
+    },
+    {
+      "source": "/media/(.*)",
+      "destination": "http://98.70.53.78:8000"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/"
+    }
+  ]
+}

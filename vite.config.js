@@ -34,6 +34,7 @@ export default defineConfig(({ mode }) => {
       '127.0.0.1',
       'frontend',
       'irate-brunilda-uncaustically.ngrok-free.dev',
+      'finance-manager-putung.vercel.app'
     ],
     },
   }
