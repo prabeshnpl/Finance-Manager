@@ -42,6 +42,8 @@
 
     ```
 - Follow steps below.
+- Copy your local files to the server: 
+    - `scp -i /path/to/your/azure-key.pem /path/to/your/backup.dump your_ssh_username@your_azure_vm_ip:~/.`
 
 ## Pull image from GHCR and run directly
 1. Create Project directory
@@ -116,6 +118,8 @@
 5. Start the app
     - `docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d`
     - or `docker-compose -f docker-compose.prod.yml up -d`
+6. Check the logs
+    - `docker compose -f docker-compose.prod.yml logs -f api`
 
 ## Pull repo from Github and run
 - First restore the data if needed. Command is provided below.
@@ -141,10 +145,9 @@ git checkout v1.0.0
 ```
 
 ## Backup Postgres-db
-
-### Run it strictly on `git bash` or `cmd` not in `powershell`
-- Using plain SQL: `docker exec -t postgres-db pg_dump -U admin -d activity_tracker > backup.sql`
-- Using custom dump file:: `docker exec -t postgres-db pg_dump -U admin -d activity_tracker -F c > backup.dump`
+- Run it strictly on `git bash` or `cmd` not in `powershell`
+    - Using plain SQL: `docker exec -t postgres-db pg_dump -U admin -d activity_tracker > backup.sql`
+    - Using custom dump file:: `docker exec -t postgres-db pg_dump -U admin -d activity_tracker -F c > backup.dump`
 
 ## Restore db
 - Using plain SQL:  `docker exec -i postgres-db psql -U admin -d activity_tracker < backup.sql`
