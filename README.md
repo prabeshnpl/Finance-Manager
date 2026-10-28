@@ -1,7 +1,5 @@
 ### Push your code from 'main' branch to 'branch-frontend' for production
-- `git subtree split --prefix=Frontend -b temp-deploy-branch`
-- `git push origin temp-deploy-branch:branch-frontend --force`
-- `git branch -D temp-deploy-branch`
+- `git subtree push --prefix=Frontend origin branch-frontend`
 
 ### Run Nginx to test react build
 - Run the command:
