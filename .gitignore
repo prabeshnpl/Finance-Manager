@@ -35,3 +35,4 @@ dist-ssr
 
 # Secrets
 serviceAccountKey.json
+FinanceManager-Backend_key.pem

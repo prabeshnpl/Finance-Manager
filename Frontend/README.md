@@ -1,4 +1,7 @@
-# Run Nginx to test react build
+### Push your code from 'main' branch to 'branch-frontend' for production
+- `git subtree push --prefix=Frontend origin branch-frontend`
+
+### Run Nginx to test react build
 - Run the command:
     ```
     docker run --name my-local-nginx \
