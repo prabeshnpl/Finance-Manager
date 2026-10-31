@@ -65,11 +65,8 @@ class TransactionViewset(BaseTenantModelViewSet):
         data = request.data
         data['created_by']=request.user.id
         data['organization'] = request.organization.id
-        print(data, flush=True)
-        print("after validation:\n.............................\n", flush=True)
         serializer = TransactionSerializer(data=data)
         serializer.is_valid(raise_exception=True)
-        print(serializer.validated_data, flush=True)
         entity = usecase.execute(data=serializer.validated_data, organization=request.organization.id,role=request.role)
 
         if isinstance(entity, Response):
